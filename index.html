@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07101e" />
+    <meta name="description" content="Use this unofficial Genshin Wish Simulator to test pulls, calculate pity and 50/50 odds, plan primogems, and track local wish statistics." />
+    <meta property="og:title" content="Genshin Wish Simulator & Pity Calculator — Astral Wish Lab" />
+    <meta property="og:description" content="Simulate character-event pulls, estimate pity and 50/50 odds, plan primogems, and keep wish statistics locally." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="%VITE_SITE_URL%" />
+    <meta property="og:image" content="%VITE_SITE_URL%og-card.svg" />
+    <meta property="og:image:alt" content="Astral Wish Lab celestial wish simulator and pity planner" />
+    <meta property="og:site_name" content="Astral Wish Lab" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Genshin Wish Simulator & Pity Calculator — Astral Wish Lab" />
+    <meta name="twitter:description" content="Simulate character-event pulls, estimate pity and 50/50 odds, plan primogems, and keep wish statistics locally." />
+    <meta name="twitter:image" content="%VITE_SITE_URL%og-card.svg" />
+    <link rel="canonical" href="%VITE_SITE_URL%" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Genshin Wish Simulator & Pity Calculator — Astral Wish Lab</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Astral Wish Lab — Genshin Wish Simulator",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Web",
+        "description": "An unofficial character-event wish simulator, pity and 50/50 calculator, primogem planner, and local pull statistics tool.",
+        "url": "%VITE_SITE_URL%",
+        "isAccessibleForFree": true,
+        "featureList": ["Character-event wish simulation", "Pity and 50/50 probability calculator", "Primogem planner", "Local pull statistics"],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <main class="static-fallback">
+        <h1>Genshin Wish Simulator and Pity Calculator</h1>
+        <p>Astral Wish Lab is an unofficial fan-made character-event wish simulator. Test single or ten pulls, set your current pity and 50/50 guarantee, estimate featured-character probability, and plan how many primogems you may have before a banner ends.</p>
+        <h2>Character guarantee and primogem planning</h2>
+        <p>The model uses a 0.6% base 5-star rate, 90-wish hard pity, a featured 50/50 with a guarantee after a loss, and a 10-wish 4-star-or-higher guarantee. Soft pity after wish 73 is an explicit approximation rather than a claim about unpublished server behavior.</p>
+        <p>No login or game account is required. Wish history remains in this browser. Weapon banner rules are not included in the current character-event model.</p>
+      </main>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
