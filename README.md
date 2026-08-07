@@ -2,6 +2,8 @@
 
 An original, unofficial fan-made wish simulator, pity calculator, primogem planner, and local pull statistics tool. It does not use official artwork, connect to a game account, or claim exact unpublished soft-pity behavior.
 
+please visit https://genshinwishsimulator.app
+
 ## Commands
 
 ```bash
