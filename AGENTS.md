@@ -8,8 +8,9 @@
 ## Product constraints
 
 - This is an unofficial fan tool. Do not add official logos, character art, copied game UI, account login/import, or language implying affiliation with HoYoverse.
-- The character-event model uses 0.6% base 5★, 90 hard pity, 50/50 plus post-loss guarantee, and 10-wish 4★ hard pity. The soft-pity curve after wish 73 is explicitly an approximation; do not present it as verified server behavior.
-- Browser persistence uses the versioned `astral-wish-lab:v1` localStorage key. Data must remain local unless the product architecture is deliberately changed.
+- The character-event model uses 0.6% base 5★, 90 hard pity, 50/50 plus post-loss guarantee, and 10-wish 4★ hard pity. The weapon example uses 0.7%, 80 hard pity, a simplified 75% featured check, and one fate point. Soft-pity curves are approximations; never present them as verified server behavior.
+- Browser persistence uses `astral-wish-lab:v2` and migrates character pity/stat totals from `astral-wish-lab:v1`. Data must remain local unless the architecture is deliberately changed.
+- `src/bannerCatalog.ts` contains an original fictional roster. Do not replace it with official character/weapon names, current banner claims, or unlicensed artwork.
 
 ## Deployment and SEO
 
