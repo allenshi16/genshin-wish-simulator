@@ -3,7 +3,6 @@ import { banners, catalog, getBanner, getItem, type BannerType, type CatalogItem
 import { chanceForFeaturedCopies, primogemsToWishes, type BannerState } from './wishMath'
 import { initialStoredData, readStoredData, writeStoredData, type HistoryItem, type StoredData } from './storage'
 import { createPullTransaction } from './pullTransaction'
-import { startAmbientField } from './audioField'
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Number.isFinite(value) ? value : min))
 
@@ -24,11 +23,8 @@ function App() {
   const [copies, setCopies] = useState(1)
   const [copied, setCopied] = useState(false)
   const [announcement, setAnnouncement] = useState('')
-  const [ambientOn, setAmbientOn] = useState(false)
-  const ambientCleanupRef = useRef<(() => void) | null>(null)
 
   useEffect(() => { writeStoredData(stored) }, [stored])
-  useEffect(() => () => ambientCleanupRef.current?.(), [])
   useEffect(() => () => { if (revealTimerRef.current !== null) window.clearTimeout(revealTimerRef.current) }, [])
 
   const banner = getBanner(activeBanner)
@@ -79,24 +75,6 @@ function App() {
     setLatest([])
   }
 
-  function toggleAmbient() {
-    if (ambientCleanupRef.current) {
-      ambientCleanupRef.current()
-      ambientCleanupRef.current = null
-      setAmbientOn(false)
-      setAnnouncement('Ambient field muted.')
-      return
-    }
-    const cleanup = startAmbientField()
-    if (!cleanup) {
-      setAnnouncement('Ambient audio is not available in this browser.')
-      return
-    }
-    ambientCleanupRef.current = cleanup
-    setAmbientOn(true)
-    setAnnouncement('Ambient field enabled.')
-  }
-
   async function sharePlan() {
     const target = copies === 1 ? 'one featured character' : `${copies} featured character copies`
     const text = `Astral Wish Lab: ${projectedWishes} projected wishes and a ${Math.round(chance * 100)}% estimated chance for ${target}. Character pity: ${characterState.pity5}.`
@@ -111,7 +89,7 @@ function App() {
       <header className="topbar">
         <a className="brand" href="#top" aria-label="Astral Wish Lab home"><span className="brand-mark">✦</span><span>ASTRAL <b>WISH LAB</b></span></a>
         <nav aria-label="Primary navigation"><a href="#simulator">Wish</a><a href="#collection">Collection</a><a href="#planner">Planner</a><a href="#method">Rules</a></nav>
-        <div className="topbar-tools"><button className={`audio-toggle ${ambientOn ? 'active' : ''}`} aria-label={ambientOn ? 'Mute ambient audio' : 'Enable ambient audio'} aria-pressed={ambientOn} onClick={toggleAmbient}><span aria-hidden="true">{ambientOn ? '◉' : '◌'}</span><span>{ambientOn ? 'Ambient on' : 'Ambient off'}</span></button><span className="status-dot">Local data only</span></div>
+        <span className="status-dot">Local data only</span>
       </header>
 
       <main id="top">
