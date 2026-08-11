@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaedehara Kazuha Wish Simulator &amp; Pity Calculator</title>
+<meta name="description" content="Test pulls for Kaedehara Kazuha (Anemo, Sword) with this free Genshin wish simulator. Check Kazuha's pity, 50/50 odds, soft and hard pity, then plan your primogems.">
+<link rel="canonical" href="https://genshinwishsimulator.app/characters/kazuha/">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Kaedehara Kazuha Wish Simulator","url":"https://genshinwishsimulator.app/characters/kazuha/","applicationCategory":"GameApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"Test pulls for Kaedehara Kazuha (Anemo, Sword) with this free Genshin wish simulator. Check Kazuha's pity, 50/50 odds, soft and hard pity, then plan your primogems.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many pulls until hard pity for Kaedehara Kazuha?","acceptedAnswer":{"@type":"Answer","text":"Hard pity is 90 pulls. If you haven't pulled a five-star by your 89th wish, the 90th is guaranteed to be a five-star. Soft pity starts around pull 74, where the rate rises sharply."}},{"@type":"Question","name":"Is Kaedehara Kazuha guaranteed after losing the 50/50?","acceptedAnswer":{"@type":"Answer","text":"Yes. If you lose the 50/50 on a featured character banner, your next five-star is guaranteed to be the featured character, and the guarantee carries into the next banner."}},{"@type":"Question","name":"What are the odds of pulling Kaedehara Kazuha?","acceptedAnswer":{"@type":"Answer","text":"The base five-star rate is 0.6%, rising from pull 74 onward. When a five-star drops, you have a 50% chance it is the featured character (Kaedehara Kazuha) and a 50% chance of a standard five-star."}},{"@type":"Question","name":"Is Kaedehara Kazuha a support?","acceptedAnswer":{"@type":"Answer","text":"Kaedehara Kazuha is a 5-star Anemo Sword user that plays a Support role. Whether they are worth pulling depends on your roster and team archetypes."}}]}</script>
+<style>
+:root{--bg:#0a0f1e;--card:#131a2f;--line:#26304f;--text:#e8ecf7;--dim:#9aa4c4;--accent:#e8a0bf}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:780px;margin:0 auto;padding:28px 20px}
+a{color:#ffd6e8}h1{font-size:1.85rem;line-height:1.25}.star{color:#ffd166;letter-spacing:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin:18px 0}
+.card h2{margin-top:0}
+table{width:100%;border-collapse:collapse}td,th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+input[type=number]{width:90px;padding:6px;background:#0b1020;color:#fff;border:1px solid #3a4668;border-radius:6px}
+button{padding:9px 16px;background:var(--accent);color:#1a2035;font-weight:700;border:0;border-radius:8px;cursor:pointer;font-size:1rem}
+#sim-result{margin-top:12px;font-weight:600;color:#aef0c9}
+.nav{display:flex;justify-content:space-between;margin-top:30px;font-weight:600}
+ul.faq{list-style:none;padding:0}ul.faq li{border-top:1px solid var(--line);padding:10px 0}
+footer{margin-top:34px;color:var(--dim);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p><a href="/">← Back to Astral Wish Lab — Genshin Wish Simulator</a></p>
+<h1>Kaedehara Kazuha Wish Simulator <span class="star">★★★★★</span></h1>
+<p>Test your luck pulling for <strong>Kaedehara Kazuha</strong> — a 5-star <strong>Anemo</strong> Sword user that plays a <strong>Support</strong> role. Use the simulator below to check pity, 50/50 odds, soft and hard pity, and your primogem budget before you spend anything in the real game.</p>
+
+<div class="card">
+<h2>Kaedehara Kazuha pull simulator</h2>
+<p>Set your current pity (0–90), how many pulls to simulate, and whether you're on a guaranteed pity. The simulation respects the real character-event model: 0.6% base five-star rate, soft pity from pull 74, hard pity at 90, and the 50/50 with post-loss guarantee.</p>
+<label>Current pity: <input type="number" id="sim-pity" value="0" min="0" max="90"></label><br>
+<label>Pulls to simulate: <input type="number" id="sim-budget" value="100" min="1" max="2000"></label><br>
+<label><input type="checkbox" id="sim-guarantee"> I'm on guaranteed pity</label><br><br>
+<button type="button" onclick="runPullSimulation()">Simulate pulls</button>
+<div id="sim-result">Enter your numbers and hit Simulate pulls.</div>
+</div>
+
+<div class="card">
+<h2>Kaedehara Kazuha at a glance</h2>
+<table>
+<tr><th>Rarity</th><td>★★★★★ (5-star)</td></tr>
+<tr><th>Element</th><td>Anemo</td></tr>
+<tr><th>Weapon</th><td>Sword</td></tr>
+<tr><th>Role</th><td>Support</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>How Kaedehara Kazuha's banner pity works</h2>
+<p>Every featured character banner uses the same wish mechanics:</p>
+<ul>
+<li><strong>Hard pity:</strong> a five-star is guaranteed within 90 pulls.</li>
+<li><strong>Soft pity:</strong> the five-star rate rises sharply from pull 74.</li>
+<li><strong>50/50:</strong> when a five-star drops, it's a 50% chance to be the featured character (Kaedehara Kazuha).</li>
+<li><strong>Guarantee carries over:</strong> pity and the guarantee carry into the next featured banner, so pulls now still count toward a future Kaedehara Kazuha banner.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Frequently asked questions about pulling for Kaedehara Kazuha</h2>
+<ul class="faq"><li><h3>How many pulls until hard pity for Kaedehara Kazuha?</h3><p>Hard pity is 90 pulls. If you haven't pulled a five-star by your 89th wish, the 90th is guaranteed to be a five-star. Soft pity starts around pull 74, where the rate rises sharply.</p></li><li><h3>Is Kaedehara Kazuha guaranteed after losing the 50/50?</h3><p>Yes. If you lose the 50/50 on a featured character banner, your next five-star is guaranteed to be the featured character, and the guarantee carries into the next banner.</p></li><li><h3>What are the odds of pulling Kaedehara Kazuha?</h3><p>The base five-star rate is 0.6%, rising from pull 74 onward. When a five-star drops, you have a 50% chance it is the featured character (Kaedehara Kazuha) and a 50% chance of a standard five-star.</p></li><li><h3>Is Kaedehara Kazuha a support?</h3><p>Kaedehara Kazuha is a 5-star Anemo Sword user that plays a Support role. Whether they are worth pulling depends on your roster and team archetypes.</p></li></ul>
+</div>
+
+<div class="card">
+<h2>More wish simulators</h2>
+<ul><li><a href="/characters/venti/">Venti wish simulator</a></li><li><a href="/characters/zhongli/">Zhongli wish simulator</a></li><li><a href="/characters/raiden-shogun/">Raiden Shogun wish simulator</a></li><li><a href="/characters/nahida/">Nahida wish simulator</a></li><li><a href="/characters/furina/">Furina wish simulator</a></li><li><a href="/characters/neuvillette/">Neuvillette wish simulator</a></li><li><a href="/characters/hu-tao/">Hu Tao wish simulator</a></li><li><a href="/characters/ganyu/">Ganyu wish simulator</a></li><li><a href="/characters/ayaka/">Kamisato Ayaka wish simulator</a></li><li><a href="/characters/arlecchino/">Arlecchino wish simulator</a></li><li><a href="/characters/mavuika/">Mavuika wish simulator</a></li><li><a href="/characters/xiao/">Xiao wish simulator</a></li><li><a href="/characters/yae-miko/">Yae Miko wish simulator</a></li><li><a href="/characters/kokomi/">Sangonomiya Kokomi wish simulator</a></li><li><a href="/characters/itto/">Arataki Itto wish simulator</a></li><li><a href="/characters/alhaitham/">Alhaitham wish simulator</a></li><li><a href="/characters/nilou/">Nilou wish simulator</a></li><li><a href="/characters/navia/">Navia wish simulator</a></li><li><a href="/characters/lyney/">Lyney wish simulator</a></li><li><a href="/characters/wanderer/">Wanderer wish simulator</a></li><li><a href="/characters/clorinde/">Clorinde wish simulator</a></li></ul>
+</div>
+
+<div class="nav"><a href="/characters/xiao/">← Xiao</a><a href="/characters/yae-miko/">Yae Miko →</a></div>
+<footer>Astral Wish Lab is an unofficial fan tool and is not affiliated with or endorsed by HoYoverse. Character names are used for identification only; all original content and tools are ours.</footer>
+</div>
+<script src="/characters/simulator.js" defer></script>
+</body>
+</html>
