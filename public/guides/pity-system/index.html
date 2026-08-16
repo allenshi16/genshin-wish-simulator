@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="The exact math behind Genshin Impact's pity system: 0.6% base rate, soft pity from pull 74, hard pity at 90, 50/50 odds, and guarantee carry-over — with a computed probability table." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://genshinwishsimulator.app/guides/pity-system/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Genshin Pity System Math: Exact Soft Pity, Hard Pity & 50/50 Odds" />
+    <meta property="og:description" content="Computed probability table for Genshin's wish system: 74 soft pity, 90 hard pity, 50/50 and guarantee — plus median pulls and expected value." />
+    <meta property="og:url" content="https://genshinwishsimulator.app/guides/pity-system/" />
+    <meta property="og:image" content="https://genshinwishsimulator.app/og-card.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Genshin Pity System Math" />
+    <title>Genshin Pity System Math: Soft Pity, Hard Pity &amp; 50/50 — Exact Odds</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Genshin Pity System Math: Soft Pity, Hard Pity & 50/50 Explained",
+      "description": "Exact computed probabilities for the Genshin wish system: base 0.6%, soft pity from 74, hard pity 90, 50/50 and guarantee.",
+      "url": "https://genshinwishsimulator.app/guides/pity-system/",
+      "author": { "@type": "Organization", "name": "Astral Wish Lab" },
+      "datePublished": "2026-08-16"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "When does soft pity start in Genshin?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Soft pity begins at pull 74 on character banners. From pull 74 onward the 5-star rate climbs ~6% per pull until it reaches 100% at hard pity (pull 90)." } },
+        { "@type": "Question", "name": "What is the exact chance of a 5-star by pull 80?",
+          "acceptedAnswer": { "@type": "Answer", "text": "By pull 80 the cumulative probability of having gotten a 5-star is 91.85%. By pull 90 it is 100% (hard pity)." } },
+        { "@type": "Question", "name": "How does the 50/50 work?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Your first 5-star on a character banner has a 50% chance to be the featured character. If you lose the 50/50, the next 5-star is guaranteed to be the featured character." } },
+        { "@type": "Question", "name": "What is the median number of pulls for a 5-star?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The median is 76 pulls — half of all players get their 5-star by then. 75% of players have one by pull 78, and 90% by pull 80." } },
+        { "@type": "Question", "name": "Does pity carry over between banners?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pity count and the 50/50 guarantee both carry over between character event banners. A guaranteed featured character stays guaranteed until used." } }
+      ]
+    }
+    </script>
+    <style>
+      .guide{max-width:900px;margin:0 auto;padding:56px 24px 90px;font-family:-apple-system,'Segoe UI',Roboto,sans-serif;color:#1e293b;line-height:1.7}
+      .guide h1{font-size:clamp(28px,4vw,44px);line-height:1.15;letter-spacing:-.03em;margin:10px 0 14px}
+      .guide .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6366f1;font-weight:600}
+      .guide .lede{font-size:17px;color:#475569;max-width:660px;margin-bottom:34px}
+      .guide h2{font-size:24px;margin:44px 0 14px;letter-spacing:-.02em}
+      .guide p{font-size:15px;color:#334155;max-width:700px}
+      .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+      .stat{border:1px solid #e2e8f0;border-radius:12px;padding:18px;background:#fff}
+      .stat b{display:block;font-size:26px;color:#6366f1;letter-spacing:-.02em}
+      .stat span{font-size:12px;color:#64748b}
+      .table-wrap{overflow-x:auto;border:1px solid #e2e8f0;border-radius:12px;margin:22px 0}
+      table{width:100%;border-collapse:collapse;font-size:13px}
+      th{background:#f8fafc;text-align:left;padding:10px 14px;color:#64748b;font-weight:600;border-bottom:1px solid #e2e8f0}
+      td{padding:9px 14px;border-bottom:1px solid #f1f5f9}
+      tr:nth-child(even) td{background:#fafbfc}
+      #pityChart{width:100%;height:320px;margin:20px 0}
+      .chart-note{font-size:12px;color:#94a3b8}
+      .faq details{border-bottom:1px solid #e2e8f0;padding:16px 0}
+      .faq summary{cursor:pointer;font-weight:600;font-size:15px}
+      .faq details p{font-size:14px;color:#475569;margin:12px 0 0;max-width:640px}
+      .back{display:inline-block;margin-bottom:22px;font-size:13px;color:#6366f1;text-decoration:none}
+      a{color:#6366f1}
+    </style>
+  </head>
+  <body>
+    <main class="guide">
+      <a class="back" href="/">← Back to Wish Simulator</a>
+      <div class="kicker">Data · Wish Mechanics</div>
+      <h1>Genshin Pity System Math: Exact Odds, Soft &amp; Hard Pity</h1>
+      <p class="lede">Every number below is computed from the standard character-banner model — 0.6% base rate, soft pity from pull 74, hard pity at pull 90, and the 50/50 with guarantee. No hand-waving, no "about" figures.</p>
+
+      <div class="stat-grid">
+        <div class="stat"><b>76</b><span>Median pulls to a 5★</span></div>
+        <div class="stat"><b>91.85%</b><span>Chance by pull 80</span></div>
+        <div class="stat"><b>90</b><span>Hard pity (guaranteed)</span></div>
+        <div class="stat"><b>61.3</b><span>Expected pulls per 5★</span></div>
+      </div>
+
+      <h2>The soft pity ramp</h2>
+      <p>Before pull 74, every pull has a flat 0.6% chance. From pull 74 onward, the rate increases by roughly 6% per pull — pull 74 is ~6.6%, pull 80 is ~42.6%, and by pull 90 it is 100%. That ramp is why most 5-stars arrive between pulls 74 and 82, and why "pity at 90" is technically correct but practically rare.</p>
+
+      <h2>Cumulative probability table</h2>
+      <p>Here is the exact computed chance of having obtained a 5-star by each milestone (cumulative, assuming you start at 0 pity):</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pull #</th><th>Rate this pull</th><th>Cumulative chance</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>0.6%</td><td>0.6%</td></tr>
+          <tr><td>2</td><td>0.6%</td><td>1.2%</td></tr>
+          <tr><td>3</td><td>0.6%</td><td>1.79%</td></tr>
+          <tr><td>4</td><td>0.6%</td><td>2.38%</td></tr>
+          <tr><td>5</td><td>0.6%</td><td>2.96%</td></tr>
+          <tr><td>6</td><td>0.6%</td><td>3.55%</td></tr>
+          <tr><td>7</td><td>0.6%</td><td>4.13%</td></tr>
+          <tr><td>8</td><td>0.6%</td><td>4.7%</td></tr>
+          <tr><td>9</td><td>0.6%</td><td>5.27%</td></tr>
+          <tr><td>10</td><td>0.6%</td><td>5.84%</td></tr>
+          <tr><td>70</td><td>0.6%</td><td>34.38%</td></tr>
+          <tr><td>71</td><td>0.6%</td><td>34.77%</td></tr>
+          <tr><td>72</td><td>0.6%</td><td>35.16%</td></tr>
+          <tr><td>73</td><td>0.6%</td><td>35.55%</td></tr>
+          <tr><td>74</td><td>6.6%</td><td>39.81%</td></tr>
+          <tr><td>75</td><td>12.6%</td><td>47.39%</td></tr>
+          <tr><td>76</td><td>18.6%</td><td>57.18%</td></tr>
+          <tr><td>77</td><td>24.6%</td><td>67.71%</td></tr>
+          <tr><td>78</td><td>30.6%</td><td>77.59%</td></tr>
+          <tr><td>79</td><td>36.6%</td><td>85.79%</td></tr>
+          <tr><td>80</td><td>42.6%</td><td>91.85%</td></tr>
+          <tr><td>81</td><td>48.6%</td><td>95.81%</td></tr>
+          <tr><td>82</td><td>54.6%</td><td>98.1%</td></tr>
+          <tr><td>83</td><td>60.6%</td><td>99.25%</td></tr>
+          <tr><td>84</td><td>66.6%</td><td>99.75%</td></tr>
+          <tr><td>85</td><td>72.6%</td><td>99.93%</td></tr>
+          <tr><td>86</td><td>78.6%</td><td>99.99%</td></tr>
+          <tr><td>87</td><td>84.6%</td><td>100%</td></tr>
+          <tr><td>88</td><td>90.6%</td><td>100%</td></tr>
+          <tr><td>89</td><td>96.6%</td><td>100%</td></tr>
+          <tr><td>90</td><td>100%</td><td>100%</td></tr>
+        </tbody>
+      </table></div>
+      <p class="chart-note">Full table: pulls 1-90. The jump between pulls 74 and 90 is the soft pity ramp.</p>
+
+      <div class="chart-wrap"><canvas id="pityChart"></canvas><p class="chart-note">Cumulative 5★ probability by pull (computed).</p></div>
+
+      <h2>50/50 and guarantee</h2>
+      <p>Your first 5-star on a character banner is a 50/50: half the time it's the featured character, half the time a standard character. If you lose, the <strong>next 5-star is guaranteed</strong> to be the featured character. Both pity and the guarantee carry over between banners. Worst case for one featured character is therefore 180 pulls (90 hard pity + 90 guaranteed).</p>
+
+      <h2>Try the math live</h2>
+      <p>You can simulate these odds yourself with the <a href="/">free wish simulator</a> — it implements this exact model, tracks your 50/50 state, and shows your live pity. There are also <a href="/characters/venti/">per-character pages</a> with the same simulator embedded.</p>
+
+      <section class="faq">
+        <h2>Frequently asked questions</h2>
+        <details open><summary>When does soft pity start in Genshin?</summary><p>Soft pity begins at pull 74 on character banners. From pull 74 onward the 5-star rate climbs ~6% per pull until it reaches 100% at hard pity (pull 90).</p></details>
+        <details><summary>What is the exact chance of a 5-star by pull 80?</summary><p>By pull 80 the cumulative probability of having gotten a 5-star is 91.85%. By pull 90 it is 100% (hard pity).</p></details>
+        <details><summary>How does the 50/50 work?</summary><p>Your first 5-star on a character banner has a 50% chance to be the featured character. If you lose the 50/50, the next 5-star is guaranteed to be the featured character.</p></details>
+        <details><summary>What is the median number of pulls for a 5-star?</summary><p>The median is 76 pulls — half of all players get their 5-star by then. 75% of players have one by pull 78, and 90% by pull 80.</p></details>
+        <details><summary>Does pity carry over between banners?</summary><p>Yes. Pity count and the 50/50 guarantee both carry over between character event banners. A guaranteed featured character stays guaranteed until used.</p></details>
+      </section>
+    </main>
+    <script type="application/json" id="pityData">[{"pull":1,"rate":0.6,"cumulative":0.6},{"pull":2,"rate":0.6,"cumulative":1.2},{"pull":3,"rate":0.6,"cumulative":1.79},{"pull":4,"rate":0.6,"cumulative":2.38},{"pull":5,"rate":0.6,"cumulative":2.96},{"pull":6,"rate":0.6,"cumulative":3.55},{"pull":7,"rate":0.6,"cumulative":4.13},{"pull":8,"rate":0.6,"cumulative":4.7},{"pull":9,"rate":0.6,"cumulative":5.27},{"pull":10,"rate":0.6,"cumulative":5.84},{"pull":11,"rate":0.6,"cumulative":6.41},{"pull":12,"rate":0.6,"cumulative":6.97},{"pull":13,"rate":0.6,"cumulative":7.53},{"pull":14,"rate":0.6,"cumulative":8.08},{"pull":15,"rate":0.6,"cumulative":8.63},{"pull":16,"rate":0.6,"cumulative":9.18},{"pull":17,"rate":0.6,"cumulative":9.72},{"pull":18,"rate":0.6,"cumulative":10.27},{"pull":19,"rate":0.6,"cumulative":10.8},{"pull":20,"rate":0.6,"cumulative":11.34},{"pull":21,"rate":0.6,"cumulative":11.87},{"pull":22,"rate":0.6,"cumulative":12.4},{"pull":23,"rate":0.6,"cumulative":12.93},{"pull":24,"rate":0.6,"cumulative":13.45},{"pull":25,"rate":0.6,"cumulative":13.97},{"pull":26,"rate":0.6,"cumulative":14.48},{"pull":27,"rate":0.6,"cumulative":15},{"pull":28,"rate":0.6,"cumulative":15.51},{"pull":29,"rate":0.6,"cumulative":16.01},{"pull":30,"rate":0.6,"cumulative":16.52},{"pull":31,"rate":0.6,"cumulative":17.02},{"pull":32,"rate":0.6,"cumulative":17.52},{"pull":33,"rate":0.6,"cumulative":18.01},{"pull":34,"rate":0.6,"cumulative":18.5},{"pull":35,"rate":0.6,"cumulative":18.99},{"pull":36,"rate":0.6,"cumulative":19.48},{"pull":37,"rate":0.6,"cumulative":19.96},{"pull":38,"rate":0.6,"cumulative":20.44},{"pull":39,"rate":0.6,"cumulative":20.92},{"pull":40,"rate":0.6,"cumulative":21.39},{"pull":41,"rate":0.6,"cumulative":21.87},{"pull":42,"rate":0.6,"cumulative":22.33},{"pull":43,"rate":0.6,"cumulative":22.8},{"pull":44,"rate":0.6,"cumulative":23.26},{"pull":45,"rate":0.6,"cumulative":23.72},{"pull":46,"rate":0.6,"cumulative":24.18},{"pull":47,"rate":0.6,"cumulative":24.64},{"pull":48,"rate":0.6,"cumulative":25.09},{"pull":49,"rate":0.6,"cumulative":25.54},{"pull":50,"rate":0.6,"cumulative":25.99},{"pull":51,"rate":0.6,"cumulative":26.43},{"pull":52,"rate":0.6,"cumulative":26.87},{"pull":53,"rate":0.6,"cumulative":27.31},{"pull":54,"rate":0.6,"cumulative":27.75},{"pull":55,"rate":0.6,"cumulative":28.18},{"pull":56,"rate":0.6,"cumulative":28.61},{"pull":57,"rate":0.6,"cumulative":29.04},{"pull":58,"rate":0.6,"cumulative":29.46},{"pull":59,"rate":0.6,"cumulative":29.89},{"pull":60,"rate":0.6,"cumulative":30.31},{"pull":61,"rate":0.6,"cumulative":30.73},{"pull":62,"rate":0.6,"cumulative":31.14},{"pull":63,"rate":0.6,"cumulative":31.55},{"pull":64,"rate":0.6,"cumulative":31.97},{"pull":65,"rate":0.6,"cumulative":32.37},{"pull":66,"rate":0.6,"cumulative":32.78},{"pull":67,"rate":0.6,"cumulative":33.18},{"pull":68,"rate":0.6,"cumulative":33.58},{"pull":69,"rate":0.6,"cumulative":33.98},{"pull":70,"rate":0.6,"cumulative":34.38},{"pull":71,"rate":0.6,"cumulative":34.77},{"pull":72,"rate":0.6,"cumulative":35.16},{"pull":73,"rate":0.6,"cumulative":35.55},{"pull":74,"rate":6.6,"cumulative":39.81},{"pull":75,"rate":12.6,"cumulative":47.39},{"pull":76,"rate":18.6,"cumulative":57.18},{"pull":77,"rate":24.6,"cumulative":67.71},{"pull":78,"rate":30.6,"cumulative":77.59},{"pull":79,"rate":36.6,"cumulative":85.79},{"pull":80,"rate":42.6,"cumulative":91.85},{"pull":81,"rate":48.6,"cumulative":95.81},{"pull":82,"rate":54.6,"cumulative":98.1},{"pull":83,"rate":60.6,"cumulative":99.25},{"pull":84,"rate":66.6,"cumulative":99.75},{"pull":85,"rate":72.6,"cumulative":99.93},{"pull":86,"rate":78.6,"cumulative":99.99},{"pull":87,"rate":84.6,"cumulative":100},{"pull":88,"rate":90.6,"cumulative":100},{"pull":89,"rate":96.6,"cumulative":100},{"pull":90,"rate":100,"cumulative":100}]</script>
+    <script src="/guides/pity-system/chart.js"></script>
+  </body>
+</html>
