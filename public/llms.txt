@@ -1,0 +1,7 @@
+# Astral Wish Lab
+
+> Unofficial fan-made wish/pull simulator for gacha-style games: multi-banner wish simulator, pity calculator, primogem planner, and local pull statistics. Includes original example characters, never connects to any game account.
+
+## Main pages
+- [Home](https://genshinwishsimulator.app/): Wish simulator and tools
+- [Guides](https://genshinwishsimulator.app/guides): Pity system math and gacha probability explainers
