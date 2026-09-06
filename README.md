@@ -1,5 +1,7 @@
 # Astral Wish Lab
 
+🌐 **Live site:** [genshinwishsimulator.app](https://genshinwishsimulator.app/)
+
 An original, unofficial fan-made multi-banner wish simulator, pity calculator, primogem planner, fictional collection, and local pull statistics tool. It includes original example characters and weapons rather than official artwork or current banner data, never connects to a game account, and does not claim exact unpublished soft-pity behavior.
 
 please visit https://genshinwishsimulator.app
