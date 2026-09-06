@@ -4,4 +4,5 @@
 
 ## Main pages
 - [Home](https://genshinwishsimulator.app/): Wish simulator and tools
-- [Guides](https://genshinwishsimulator.app/guides): Pity system math and gacha probability explainers
+- [Pity System Math](https://genshinwishsimulator.app/guides/pity-system/): Exact soft pity, hard pity and 50/50 probabilities
+- [Primogem Planning](https://genshinwishsimulator.app/guides/primogem-planning/): Primogem income per patch for F2P, Welkin and BP players
