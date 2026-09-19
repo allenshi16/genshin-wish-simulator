@@ -24,6 +24,8 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DATA_FILE = join(ROOT, 'scripts', 'character-data.json')
 const OUT_DIR = join(ROOT, 'public', 'characters')
 const CANONICAL_BASE = 'https://genshinwishsimulator.app'
+// AdSense publisher id (e.g. ca-pub-1234567890123456). Empty = ads disabled.
+const ADSENSE_CLIENT = (process.env.ADSENSE_CLIENT || '').trim()
 
 const data = JSON.parse(readFileSync(DATA_FILE, 'utf8'))
 const characters = data.characters
@@ -129,6 +131,7 @@ function pageHtml(c, index, all) {
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${CANONICAL_BASE}/characters/${slug}/">
 <meta name="robots" content="index,follow">
+<meta name="adsense-client" content="${ADSENSE_CLIENT}">
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
 <style>
@@ -145,6 +148,7 @@ button{padding:9px 16px;background:var(--accent);color:#1a2035;font-weight:700;b
 .nav{display:flex;justify-content:space-between;margin-top:30px;font-weight:600}
 ul.faq{list-style:none;padding:0}ul.faq li{border-top:1px solid var(--line);padding:10px 0}
 footer{margin-top:34px;color:var(--dim);font-size:.85rem}
+.ad-slot{margin-top:18px;min-height:0}.ad-slot:empty{display:none}
 </style>
 </head>
 <body>
@@ -194,10 +198,17 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
 <ul>${othersList}</ul>
 </div>
 
+<div class="card">
+<h2>Learn the pull math</h2>
+<ul><li><a href="/guides/pity-system/">Pity system math: exact soft pity, hard pity &amp; 50/50 odds</a></li><li><a href="/guides/primogem-planning/">How many primogems per patch? F2P, Welkin &amp; BP breakdown</a></li></ul>
+</div>
+
 <div class="nav">${nav}</div>
-<footer>Astral Wish Lab is an unofficial fan tool and is not affiliated with or endorsed by HoYoverse. Character names are used for identification only; all original content and tools are ours.</footer>
+<div class="ad-slot" aria-hidden="true"></div>
+<footer>Astral Wish Lab is an unofficial fan tool and is not affiliated with or endorsed by HoYoverse. Character names are used for identification only; all original content and tools are ours. <a href="/privacy/">Privacy</a></footer>
 </div>
 <script src="/characters/simulator.js" defer></script>
+<script src="/ads.js" defer></script>
 </body>
 </html>
 `
@@ -213,10 +224,20 @@ function main() {
   })
 
   // Regenerate sitemap.xml so it always stays in sync with character-data.json.
+  // This script owns the full sitemap, including the static guide entries below —
+  // rerunning generate-pity-guide.mjs afterwards stays a no-op because its
+  // remove-and-reappend is idempotent against identical entries.
+  const guideEntries = [
+    { loc: 'guides/pity-system/', lastmod: '2026-08-16' },
+    { loc: 'guides/primogem-planning/', lastmod: '2026-09-06' },
+    { loc: 'privacy/', lastmod: '2026-09-18' },
+  ]
+    .map((g) => `  <url>\n    <loc>%VITE_SITE_URL%${g.loc}</loc>\n    <lastmod>${g.lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.9</priority>\n  </url>`)
+    .join('\n')
   const urlEntries = characters
     .map((c) => `  <url>\n    <loc>%VITE_SITE_URL%characters/${c.slug}/</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`)
     .join('\n')
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>%VITE_SITE_URL%</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n${urlEntries}\n</urlset>\n`
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>%VITE_SITE_URL%</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n${urlEntries}\n${guideEntries}\n</urlset>\n`
   writeFileSync(join(ROOT, 'public', 'sitemap.xml'), sitemap, 'utf8')
 
   const total = characters.reduce((sum, c) => sum + Buffer.byteLength(pageHtml(c, characters.indexOf(c), characters)), 0)

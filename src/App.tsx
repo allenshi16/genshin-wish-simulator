@@ -147,7 +147,8 @@ function App() {
 
         <section className="method" id="method"><div><p className="eyebrow">TRANSPARENT MODELS</p><h2>Simulation,<br />not server prophecy.</h2></div><div className="method-copy"><p>The Genshin pity calculator for character and standard examples uses a 0.6% base 5★ rate and 90 hard pity. Character events add a 50/50 featured check with a post-loss guarantee.</p><p>The weapon banner simulator uses a 0.7% base 5★ rate, 80 hard pity, a simplified 75% featured check, and one fate point toward the selected instrument. Soft-pity curves are labelled approximations, not verified server behavior.</p><p>All names, portraits, banners, and instruments on this page are original fictional examples. This tool is not affiliated with or endorsed by HoYoverse.</p></div></section>
       </main>
-      <footer><div className="brand"><span className="brand-mark">✦</span><span>ASTRAL <b>WISH LAB</b></span></div><p>Unofficial fan-made simulator with an original example roster. No official logos, character art, account credentials, or current game banner data are used.</p><a href="#top">Back to orbit ↑</a></footer>
+      <div className="ad-slot" aria-hidden="true"></div>
+      <footer><div className="brand"><span className="brand-mark">✦</span><span>ASTRAL <b>WISH LAB</b></span></div><p>Unofficial fan-made simulator with an original example roster. No official logos, character art, account credentials, or current game banner data are used.</p><a href="#top">Back to orbit ↑</a> · <a href="/privacy/">Privacy</a></footer>
     </div>
   )
 }

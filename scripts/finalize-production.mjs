@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto'
 
 const siteUrl = new URL(process.env.VITE_SITE_URL).href
 const allowLocalhost = process.argv.includes('--allow-localhost')
-const files = ['dist/robots.txt', 'dist/sitemap.xml']
+const files = ['dist/robots.txt', 'dist/sitemap.xml', 'dist/privacy/index.html']
 
 for (const file of files) {
   const source = await readFile(file, 'utf8')

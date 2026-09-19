@@ -67,6 +67,7 @@ const html = `<!doctype html>
     <meta name="description" content="The exact math behind Genshin Impact's pity system: 0.6% base rate, soft pity from pull 74, hard pity at 90, 50/50 odds, and guarantee carry-over — with a computed probability table." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="${SITE}/guides/pity-system/" />
+    <meta name="adsense-client" content="${process.env.ADSENSE_CLIENT || ''}" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Genshin Pity System Math: Exact Soft Pity, Hard Pity & 50/50 Odds" />
     <meta property="og:description" content="Computed probability table for Genshin's wish system: 74 soft pity, 90 hard pity, 50/50 and guarantee — plus median pulls and expected value." />
@@ -174,8 +175,10 @@ ${cum.filter((c) => c.pull <= 10 || (c.pull >= 70 && c.pull <= 90)).map((c) =>
         <details><summary>Does pity carry over between banners?</summary><p>Yes. Pity count and the 50/50 guarantee both carry over between character event banners. A guaranteed featured character stays guaranteed until used.</p></details>
       </section>
     </main>
+    <div class="ad-slot" aria-hidden="true"></div>
     <script type="application/json" id="pityData">${JSON.stringify(cum)}</script>
     <script src="/guides/pity-system/chart.js"></script>
+    <script src="/ads.js" defer></script>
   </body>
 </html>
 `

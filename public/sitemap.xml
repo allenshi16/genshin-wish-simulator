@@ -117,12 +117,24 @@
   </url>
   <url>
     <loc>%VITE_SITE_URL%guides/pity-system/</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>%VITE_SITE_URL%guides/primogem-planning/</loc>
     <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>%VITE_SITE_URL%privacy/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>%VITE_SITE_URL%guides/pity-system/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
