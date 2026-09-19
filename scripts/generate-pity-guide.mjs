@@ -230,14 +230,10 @@ const chartJs = `(function () {
 writeFileSync(join(OUT_DIR, 'index.html'), html)
 writeFileSync(join(OUT_DIR, 'chart.js'), chartJs)
 
-// --- update sitemap (idempotent: remove old guide entry, re-add) ---
-const SITEMAP = join(ROOT, 'public', 'sitemap.xml')
-let sitemap = readFileSync(SITEMAP, 'utf8')
-sitemap = sitemap.replace(/  <url>\n    <loc>%VITE_SITE_URL%\/guides\/pity-system\/<\/loc>[\s\S]*?<\/url>\n/g, '')
-const guideEntry = `  <url>\n    <loc>%VITE_SITE_URL%guides/pity-system/</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.9</priority>\n  </url>\n`
-const idx = sitemap.indexOf('</urlset>')
-sitemap = sitemap.slice(0, idx) + guideEntry + sitemap.slice(idx)
-writeFileSync(SITEMAP, sitemap, 'utf8')
+// NOTE: sitemap.xml is owned solely by generate-character-pages.mjs, which emits
+// this guide's entry (with lastmod). This script must NOT touch the sitemap —
+// its old remove-and-reappend used a regex that never matched the actual entry
+// format, appending a duplicate pity-system <url> on every run.
 
 console.log(`Generated pity-system guide at ${OUT_DIR}`)
 console.log(`Median ${median} pulls · P80 ${p80}% · EV ${evPulls} pulls · P75 ${p75} · P90 ${p90pull}`)
