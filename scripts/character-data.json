@@ -3,27 +3,341 @@
     "note": "Real Genshin Impact character names used for SEO landing pages. Fields (element, weapon, rarity, role) are stable public facts. Does NOT include official artwork, UI, logos, or copyrighted assets — text + data only per fan-tool safety boundary. Add 'release_version' or 'banner_note' only with verified data."
   },
   "characters": [
-    { "slug": "venti", "name": "Venti", "element": "Anemo", "weapon": "Bow", "rarity": 5, "role": "Support" },
-    { "slug": "zhongli", "name": "Zhongli", "element": "Geo", "weapon": "Polearm", "rarity": 5, "role": "Support" },
-    { "slug": "raiden-shogun", "name": "Raiden Shogun", "element": "Electro", "weapon": "Polearm", "rarity": 5, "role": "Support" },
-    { "slug": "nahida", "name": "Nahida", "element": "Dendro", "weapon": "Catalyst", "rarity": 5, "role": "Support" },
-    { "slug": "furina", "name": "Furina", "element": "Hydro", "weapon": "Sword", "rarity": 5, "role": "Support" },
-    { "slug": "neuvillette", "name": "Neuvillette", "element": "Hydro", "weapon": "Catalyst", "rarity": 5, "role": "DPS" },
-    { "slug": "hu-tao", "name": "Hu Tao", "element": "Pyro", "weapon": "Polearm", "rarity": 5, "role": "DPS" },
-    { "slug": "ganyu", "name": "Ganyu", "element": "Cryo", "weapon": "Bow", "rarity": 5, "role": "DPS" },
-    { "slug": "ayaka", "name": "Kamisato Ayaka", "element": "Cryo", "weapon": "Sword", "rarity": 5, "role": "DPS" },
-    { "slug": "arlecchino", "name": "Arlecchino", "element": "Pyro", "weapon": "Polearm", "rarity": 5, "role": "DPS" },
-    { "slug": "mavuika", "name": "Mavuika", "element": "Pyro", "weapon": "Claymore", "rarity": 5, "role": "DPS" },
-    { "slug": "xiao", "name": "Xiao", "element": "Anemo", "weapon": "Polearm", "rarity": 5, "role": "DPS" },
-    { "slug": "kazuha", "name": "Kaedehara Kazuha", "element": "Anemo", "weapon": "Sword", "rarity": 5, "role": "Support" },
-    { "slug": "yae-miko", "name": "Yae Miko", "element": "Electro", "weapon": "Catalyst", "rarity": 5, "role": "Support" },
-    { "slug": "kokomi", "name": "Sangonomiya Kokomi", "element": "Hydro", "weapon": "Catalyst", "rarity": 5, "role": "Support" },
-    { "slug": "itto", "name": "Arataki Itto", "element": "Geo", "weapon": "Claymore", "rarity": 5, "role": "DPS" },
-    { "slug": "alhaitham", "name": "Alhaitham", "element": "Dendro", "weapon": "Sword", "rarity": 5, "role": "DPS" },
-    { "slug": "nilou", "name": "Nilou", "element": "Hydro", "weapon": "Sword", "rarity": 5, "role": "Support" },
-    { "slug": "navia", "name": "Navia", "element": "Geo", "weapon": "Claymore", "rarity": 5, "role": "DPS" },
-    { "slug": "lyney", "name": "Lyney", "element": "Pyro", "weapon": "Bow", "rarity": 5, "role": "DPS" },
-    { "slug": "wanderer", "name": "Wanderer", "element": "Anemo", "weapon": "Catalyst", "rarity": 5, "role": "DPS" },
-    { "slug": "clorinde", "name": "Clorinde", "element": "Electro", "weapon": "Sword", "rarity": 5, "role": "DPS" }
+    {
+      "slug": "venti",
+      "name": "Venti",
+      "element": "Anemo",
+      "weapon": "Bow",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "zhongli",
+      "name": "Zhongli",
+      "element": "Geo",
+      "weapon": "Polearm",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "raiden-shogun",
+      "name": "Raiden Shogun",
+      "element": "Electro",
+      "weapon": "Polearm",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "nahida",
+      "name": "Nahida",
+      "element": "Dendro",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "furina",
+      "name": "Furina",
+      "element": "Hydro",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "neuvillette",
+      "name": "Neuvillette",
+      "element": "Hydro",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "hu-tao",
+      "name": "Hu Tao",
+      "element": "Pyro",
+      "weapon": "Polearm",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "ganyu",
+      "name": "Ganyu",
+      "element": "Cryo",
+      "weapon": "Bow",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "ayaka",
+      "name": "Kamisato Ayaka",
+      "element": "Cryo",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "arlecchino",
+      "name": "Arlecchino",
+      "element": "Pyro",
+      "weapon": "Polearm",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "mavuika",
+      "name": "Mavuika",
+      "element": "Pyro",
+      "weapon": "Claymore",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "xiao",
+      "name": "Xiao",
+      "element": "Anemo",
+      "weapon": "Polearm",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "kazuha",
+      "name": "Kaedehara Kazuha",
+      "element": "Anemo",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "yae-miko",
+      "name": "Yae Miko",
+      "element": "Electro",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "kokomi",
+      "name": "Sangonomiya Kokomi",
+      "element": "Hydro",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "itto",
+      "name": "Arataki Itto",
+      "element": "Geo",
+      "weapon": "Claymore",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "alhaitham",
+      "name": "Alhaitham",
+      "element": "Dendro",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "nilou",
+      "name": "Nilou",
+      "element": "Hydro",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "navia",
+      "name": "Navia",
+      "element": "Geo",
+      "weapon": "Claymore",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "lyney",
+      "name": "Lyney",
+      "element": "Pyro",
+      "weapon": "Bow",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "wanderer",
+      "name": "Wanderer",
+      "element": "Anemo",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "clorinde",
+      "name": "Clorinde",
+      "element": "Electro",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "DPS"
+    },
+    {
+      "slug": "klee",
+      "name": "Klee",
+      "element": "Pyro",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "diluc",
+      "name": "Diluc",
+      "element": "Pyro",
+      "weapon": "Claymore",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "tartaglia",
+      "name": "Tartaglia",
+      "element": "Hydro",
+      "weapon": "Bow",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "yoimiya",
+      "name": "Yoimiya",
+      "element": "Pyro",
+      "weapon": "Bow",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "eula",
+      "name": "Eula",
+      "element": "Cryo",
+      "weapon": "Claymore",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "shenhe",
+      "name": "Shenhe",
+      "element": "Cryo",
+      "weapon": "Polearm",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "cyno",
+      "name": "Cyno",
+      "element": "Electro",
+      "weapon": "Polearm",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "tighnari",
+      "name": "Tighnari",
+      "element": "Dendro",
+      "weapon": "Bow",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "baizhu",
+      "name": "Baizhu",
+      "element": "Dendro",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Healer"
+    },
+    {
+      "slug": "xianyun",
+      "name": "Xianyun",
+      "element": "Anemo",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "chiori",
+      "name": "Chiori",
+      "element": "Geo",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "Sub DPS"
+    },
+    {
+      "slug": "sigewinne",
+      "name": "Sigewinne",
+      "element": "Hydro",
+      "weapon": "Bow",
+      "rarity": 5,
+      "role": "Healer"
+    },
+    {
+      "slug": "emilie",
+      "name": "Emilie",
+      "element": "Dendro",
+      "weapon": "Polearm",
+      "rarity": 5,
+      "role": "Sub DPS"
+    },
+    {
+      "slug": "kinich",
+      "name": "Kinich",
+      "element": "Dendro",
+      "weapon": "Claymore",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "mualani",
+      "name": "Mualani",
+      "element": "Hydro",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "xilonen",
+      "name": "Xilonen",
+      "element": "Geo",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "chasca",
+      "name": "Chasca",
+      "element": "Anemo",
+      "weapon": "Bow",
+      "rarity": 5,
+      "role": "Main DPS"
+    },
+    {
+      "slug": "citlali",
+      "name": "Citlali",
+      "element": "Cryo",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "mona",
+      "name": "Mona",
+      "element": "Hydro",
+      "weapon": "Catalyst",
+      "rarity": 5,
+      "role": "Support"
+    },
+    {
+      "slug": "keqing",
+      "name": "Keqing",
+      "element": "Electro",
+      "weapon": "Sword",
+      "rarity": 5,
+      "role": "Main DPS"
+    }
   ]
 }
