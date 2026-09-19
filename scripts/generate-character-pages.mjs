@@ -26,6 +26,8 @@ const OUT_DIR = join(ROOT, 'public', 'characters')
 const CANONICAL_BASE = 'https://genshinwishsimulator.app'
 // AdSense publisher id (e.g. ca-pub-1234567890123456). Empty = ads disabled.
 const ADSENSE_CLIENT = (process.env.ADSENSE_CLIENT || '').trim()
+// GA4 measurement id (e.g. G-XXXXXXXXXX). Empty = analytics disabled.
+const GA_ID = (process.env.VITE_GA_ID || '').trim()
 
 const data = JSON.parse(readFileSync(DATA_FILE, 'utf8'))
 const characters = data.characters
@@ -132,6 +134,7 @@ function pageHtml(c, index, all) {
 <link rel="canonical" href="${CANONICAL_BASE}/characters/${slug}/">
 <meta name="robots" content="index,follow">
 <meta name="adsense-client" content="${ADSENSE_CLIENT}">
+<meta name="ga-measurement" content="${GA_ID}">
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
 <style>
@@ -209,6 +212,7 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
 </div>
 <script src="/characters/simulator.js" defer></script>
 <script src="/ads.js" defer></script>
+<script src="/ga.js" defer></script>
 </body>
 </html>
 `

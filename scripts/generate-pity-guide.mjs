@@ -68,6 +68,7 @@ const html = `<!doctype html>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="${SITE}/guides/pity-system/" />
     <meta name="adsense-client" content="${process.env.ADSENSE_CLIENT || ''}" />
+    <meta name="ga-measurement" content="${process.env.VITE_GA_ID || ''}" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Genshin Pity System Math: Exact Soft Pity, Hard Pity & 50/50 Odds" />
     <meta property="og:description" content="Computed probability table for Genshin's wish system: 74 soft pity, 90 hard pity, 50/50 and guarantee — plus median pulls and expected value." />
@@ -179,6 +180,7 @@ ${cum.filter((c) => c.pull <= 10 || (c.pull >= 70 && c.pull <= 90)).map((c) =>
     <script type="application/json" id="pityData">${JSON.stringify(cum)}</script>
     <script src="/guides/pity-system/chart.js"></script>
     <script src="/ads.js" defer></script>
+    <script src="/ga.js" defer></script>
   </body>
 </html>
 `
