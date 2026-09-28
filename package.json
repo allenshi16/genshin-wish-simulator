@@ -16,7 +16,8 @@
     "seo:check": "node scripts/check-seo.mjs",
     "test": "vitest run",
     "typecheck": "tsc -b --pretty false",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "indexnow": "bash scripts/indexnow-submit.sh"
   },
   "dependencies": {
     "react": "^19.1.1",
