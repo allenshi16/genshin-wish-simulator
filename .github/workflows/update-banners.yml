@@ -1,0 +1,86 @@
+name: Update Banner Data & Deploy
+
+on:
+  schedule:
+    # Every Monday at 06:00 UTC (after weekly version resets / maintenance)
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      force_rebuild:
+        description: 'Force rebuild even if banner data unchanged'
+        required: false
+        default: 'false'
+        type: boolean
+      banner_data_url:
+        description: 'Optional: direct JSON URL for banner data'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update-banners:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Use a PAT if available so the push can trigger downstream workflows
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fetch latest banner data
+        id: fetch
+        env:
+          BANNER_DATA_URL: ${{ inputs.banner_data_url || '' }}
+        run: |
+          OUTPUT=$(node scripts/fetch-banner-data.mjs 2>&1)
+          echo "$OUTPUT"
+          CHANGED=$(echo "$OUTPUT" | grep '^CHANGED=' | tail -1 | cut -d= -f2)
+          echo "changed=${CHANGED:-false}" >> "$GITHUB_OUTPUT"
+
+      - name: Regenerate static pages
+        if: steps.fetch.outputs.changed == 'true' || inputs.force_rebuild == true
+        run: npm run seo:generate
+
+      - name: Run verification
+        if: steps.fetch.outputs.changed == 'true' || inputs.force_rebuild == true
+        run: |
+          npm run lint
+          npm run typecheck
+          npm test
+          npm run seo:check
+
+      - name: Commit and push changes
+        if: steps.fetch.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/banner-schedule.json public/
+          git diff --cached --quiet || git commit -m "chore: update banner schedule data [auto]"
+          git push
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.fetch.outputs.changed }}" = "true" ]; then
+            echo "## Banner data updated" >> "$GITHUB_STEP_SUMMARY"
+            echo "New banner data has been committed and CF Pages will redeploy." >> "$GITHUB_STEP_SUMMARY"
+          elif [ "${{ inputs.force_rebuild }}" = "true" ]; then
+            echo "## Force rebuild triggered" >> "$GITHUB_STEP_SUMMARY"
+            echo "Static pages regenerated with existing banner data." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "## No changes" >> "$GITHUB_STEP_SUMMARY"
+            echo "Banner data is up to date. No deployment needed." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Notify Feishu if data stale
+        if: always()
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+        run: node scripts/notify-feishu.mjs
