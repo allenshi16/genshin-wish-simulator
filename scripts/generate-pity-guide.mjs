@@ -70,18 +70,18 @@ const html = `<!doctype html>
     <meta name="adsense-client" content="${process.env.ADSENSE_CLIENT || ''}" />
     <meta name="ga-measurement" content="${process.env.VITE_GA_ID || ''}" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Genshin Pity System Math: Exact Soft Pity, Hard Pity & 50/50 Odds" />
+    <meta property="og:title" content="Genshin Soft Pity Calculator: Exact Odds from Pull 74, Hard Pity & 50/50" />
     <meta property="og:description" content="Computed probability table for Genshin's wish system: 74 soft pity, 90 hard pity, 50/50 and guarantee — plus median pulls and expected value." />
     <meta property="og:url" content="${SITE}/guides/pity-system/" />
     <meta property="og:image" content="${SITE}/og-card.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Genshin Pity System Math" />
-    <title>Genshin Pity System Math: Soft Pity, Hard Pity &amp; 50/50 — Exact Odds</title>
+    <meta name="twitter:title" content="Genshin Soft Pity Calculator" />
+    <title>Genshin Soft Pity Calculator: Exact Odds, Hard Pity &amp; 50/50</title>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "Genshin Pity System Math: Soft Pity, Hard Pity & 50/50 Explained",
+      "headline": "Genshin Soft Pity Calculator: Exact Odds from Pull 74, Hard Pity & 50/50 Explained",
       "description": "Exact computed probabilities for the Genshin wish system: base 0.6%, soft pity from 74, hard pity 90, 50/50 and guarantee.",
       "url": "${SITE}/guides/pity-system/",
       "author": { "@type": "Organization", "name": "Astral Wish Lab" },
@@ -135,7 +135,7 @@ const html = `<!doctype html>
     <main class="guide">
       <a class="back" href="/">← Back to Wish Simulator</a>
       <div class="kicker">Data · Wish Mechanics</div>
-      <h1>Genshin Pity System Math: Exact Odds, Soft &amp; Hard Pity</h1>
+      <h1>Genshin Soft Pity Calculator: Exact Odds from Pull 74 to Hard Pity 90</h1>
       <p class="lede">Every number below is computed from the standard character-banner model — 0.6% base rate, soft pity from pull 74, hard pity at pull 90, and the 50/50 with guarantee. No hand-waving, no "about" figures.</p>
 
       <div class="stat-grid">

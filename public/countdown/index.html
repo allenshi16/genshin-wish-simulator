@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genshin Banner Countdown — Columbina Timer + All Server Times</title>
+<meta name="description" content="Live Genshin Impact banner countdown timer. See exactly when the Columbina banner ends across NA, EU, Asia, and all servers. Multi-timezone display.">
+<link rel="canonical" href="https://genshinwishsimulator.app/countdown/">
+<meta name="robots" content="index,follow">
+<meta name="adsense-client" content="">
+<meta name="ga-measurement" content="">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Genshin Banner Countdown — Columbina Live Timer">
+<meta property="og:description" content="Live countdown to the end of the Columbina banner. All server times included.">
+<meta property="og:url" content="https://genshinwishsimulator.app/countdown/">
+<meta property="og:image" content="https://genshinwishsimulator.app/og-card.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Genshin Banner Countdown — Live Timer">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Genshin Banner Countdown: Columbina Live Timer with All Server Times",
+  "description": "Live countdown timer for the current Genshin Impact banner. Multi-timezone display covering NA, EU, Asia servers.",
+  "url": "https://genshinwishsimulator.app/countdown/",
+  "author": { "@type": "Organization", "name": "Astral Wish Lab" },
+  "datePublished": "2026-10-13",
+  "dateModified": "2026-10-13"
+}
+</script>
+<style>
+:root{--bg:#0a0f1e;--card:#131a2f;--line:#26304f;--text:#e8ecf7;--dim:#9aa4c4;--accent:#e8a0bf;--gold:#ffd166;--cyan:#83e4df}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:720px;margin:0 auto;padding:28px 20px}
+a{color:#ffd6e8}
+h1{font-size:1.6rem;line-height:1.25;margin:0 0 8px}
+h2{font-size:1.2rem;margin:0 0 10px;color:var(--cyan)}
+.star{color:var(--gold);letter-spacing:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin:18px 0}
+.countdown-main{font:700 clamp(36px,8vw,72px) ui-monospace,monospace;color:var(--gold);text-align:center;padding:30px 0;letter-spacing:3px;text-shadow:0 0 40px rgba(255,209,102,.3)}
+.countdown-label{text-align:center;color:var(--dim);font-size:14px;margin-bottom:6px}
+.countdown-sub{text-align:center;color:var(--dim);font-size:13px;margin-top:8px}
+.tz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.tz-card{padding:14px;border:1px solid var(--line);border-radius:10px;text-align:center}
+.tz-card .tz-name{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:6px}
+.tz-card .tz-time{font:600 18px ui-monospace,monospace;color:var(--cyan)}
+.tz-card .tz-date{font-size:12px;color:var(--dim);margin-top:4px}
+.progress-bar{height:6px;background:var(--line);border-radius:3px;margin:20px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--gold));border-radius:3px;transition:width 1s linear}
+.sim-cta{display:block;text-align:center;margin-top:18px;padding:14px 24px;background:var(--accent);color:#1a2035;font-weight:700;border-radius:8px;text-decoration:none;font-size:15px}
+.sim-cta:hover{opacity:.9}
+footer{margin-top:34px;color:var(--dim);font-size:.85rem}
+.ad-slot{margin-top:18px;min-height:0}.ad-slot:empty{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p><a href="/">← Back to Astral Wish Lab — Genshin Wish Simulator</a></p>
+
+<h1>Genshin Banner Countdown <span class="star">★★★★★</span></h1>
+<p>Live timer for the <strong>Columbina</strong> character event banner. All times update every second.</p>
+
+<div class="card">
+<div class="countdown-label">Columbina banner ends in</div>
+<div class="countdown-main" id="countdown" data-end="2026-10-28T17:59:59Z" data-start="2026-10-08T18:00:00Z">—</div>
+<div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
+<div class="countdown-sub" id="countdownSub"></div>
+</div>
+
+<div class="card">
+<h2>End time in all servers</h2>
+<div class="tz-grid" id="tzGrid"></div>
+</div>
+
+<div class="card">
+<h2>What happens when this banner ends?</h2>
+<p>When the Columbina banner ends, the next phase begins immediately. Your pity and 50/50 guarantee carry over — they never reset between banners. Use the <a href="/">wish simulator</a> to plan your pulls for the next phase.</p>
+<p>For the full probability breakdown, see the <a href="/guides/pity-system/">soft pity calculator</a>. To budget your primogems across upcoming banners, check the <a href="/guides/primogem-planning/">primogem planning guide</a>.</p>
+<a class="sim-cta" href="/">Open the wish simulator →</a>
+</div>
+
+<div class="ad-slot" aria-hidden="true"></div>
+<footer>Astral Wish Lab is an unofficial fan tool and is not affiliated with or endorsed by HoYoverse. <a href="/privacy/">Privacy</a></footer>
+</div>
+<script src="/countdown/countdown.js" defer></script>
+<script src="/ads.js" defer></script>
+<script src="/ga.js" defer></script>
+</body>
+</html>

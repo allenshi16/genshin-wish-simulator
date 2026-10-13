@@ -88,16 +88,16 @@ function pageHtml(c, index, all) {
   const others = all.filter((o) => o.slug !== slug)
 
   const faq = [
-    [`How many pulls until hard pity for ${t}?`, `Hard pity is 90 pulls. If you haven't pulled a five-star by your 89th wish, the 90th is guaranteed to be a five-star. Soft pity starts around pull 74, where the rate rises sharply.`],
-    [`Is ${t} guaranteed after losing the 50/50?`, `Yes. If you lose the 50/50 on a featured character banner, your next five-star is guaranteed to be the featured character, and the guarantee carries into the next banner.`],
-    [`What are the odds of pulling ${t}?`, `The base five-star rate is 0.6%, rising from pull 74 onward. When a five-star drops, you have a 50% chance it is the featured character (${t}) and a 50% chance of a standard five-star.`],
-    [`Is ${t} a ${c.role.toLowerCase()}?`, `${t} is a ${c.rarity}-star ${c.element} ${c.weapon} user that plays a ${c.role} role. Whether they are worth pulling depends on your roster and team archetypes.`],
+    [`How many pulls until hard pity for ${t}?`, `Hard pity is 90 pulls. If you haven't pulled a five-star by your 89th wish, the 90th is guaranteed to be a five-star. <a href="/guides/pity-system/">Soft pity</a> starts around pull 74, where the rate rises sharply — see the full probability table in our pity guide.`],
+    [`Is ${t} guaranteed after losing the 50/50?`, `Yes. If you lose the 50/50 on a featured character banner, your next five-star is guaranteed to be the featured character, and the guarantee carries into the next banner. The <a href="/guides/pity-system/">pity system guide</a> breaks down the full math.`],
+    [`What are the odds of pulling ${t}?`, `The base five-star rate is 0.6%, rising from pull 74 onward. When a five-star drops, you have a 50% chance it is the featured character (${t}) and a 50% chance of a standard five-star. Our <a href="/guides/pity-system/">soft pity calculator</a> shows the exact cumulative odds.`],
+    [`Is ${t} a ${c.role.toLowerCase()}?`, `${t} is a ${c.rarity}-star ${c.element} ${c.weapon} user that plays a ${c.role} role. Whether they are worth pulling depends on your roster and team archetypes. Check our <a href="/guides/primogem-planning/">primogem planning guide</a> to budget your pulls.`],
   ]
 
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+    mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]*>/g, '') } })),
   }
   const appLd = {
     '@context': 'https://schema.org',
@@ -121,7 +121,7 @@ function pageHtml(c, index, all) {
     .join('')
 
   const faqList = faq
-    .map(([q, a]) => `<li><h3>${esc(q)}</h3><p>${esc(a)}</p></li>`)
+    .map(([q, a]) => `<li><h3>${esc(q)}</h3><p>${a}</p></li>`)
     .join('')
 
   return `<!DOCTYPE html>

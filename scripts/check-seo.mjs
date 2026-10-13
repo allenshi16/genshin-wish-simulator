@@ -28,8 +28,8 @@ const h1Text = appSource.match(/<h1>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g, 
 const checks = [
   [title.length >= 30 && title.length <= 65, `Title length is ${title.length}; expected 30–65 characters.`],
   [description.length >= 110 && description.length <= 170, `Meta description length is ${description.length}; expected 110–170 characters.`],
-  [title.toLowerCase().includes('genshin wish simulator'), 'Title must describe the Genshin Wish Simulator.'],
-  [h1Text.includes('genshin wish simulator'), 'The visible H1 must describe the Genshin Wish Simulator.'],
+  [title.toLowerCase().includes('genshin wish simulator') || title.toLowerCase().includes('genshin impact wish simulator'), 'Title must describe the Genshin (Impact) Wish Simulator.'],
+  [h1Text.includes('genshin wish simulator') || h1Text.includes('genshin impact wish simulator'), 'The visible H1 must describe the Genshin (Impact) Wish Simulator.'],
   [visibleText.includes('genshin pity calculator'), 'Visible copy must explain the Genshin pity calculator.'],
   [visibleText.includes('weapon banner'), 'Visible copy must state the weapon banner scope.'],
   [html.includes('application/ld+json'), 'Software application structured data is missing.'],
@@ -43,5 +43,5 @@ if (failures.length) {
 }
 
 const wordCount = visibleText.match(/[a-z0-9/]+/g)?.length ?? 0
-const corePhraseCount = visibleText.split('genshin wish simulator').length - 1
+const corePhraseCount = (visibleText.split('genshin wish simulator').length - 1) + (visibleText.split('genshin impact wish simulator').length - 1)
 console.log(`SEO checks passed: ${wordCount} visible source words; core phrase appears ${corePhraseCount} time(s); title ${title.length} chars; description ${description.length} chars.`)
