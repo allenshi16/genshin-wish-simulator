@@ -26,6 +26,11 @@ const schedule = JSON.parse(readFileSync(DATA_FILE, 'utf8'))
 const current = schedule.phases[0]
 const next = schedule.phases[1]
 
+// Load banner history for the history table
+const HISTORY_FILE = join(ROOT, 'scripts', 'banner-history.json')
+let bannerHistory = { versions: [] }
+try { bannerHistory = JSON.parse(readFileSync(HISTORY_FILE, 'utf8')) } catch {}
+
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
@@ -161,6 +166,20 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
 <div class="card">
 <h2>Should you pull for ${esc(curChar.name)} or save for ${esc(nxtChar.name)}?</h2>
 <p>Use the <a href="/">wish simulator</a> to rehearse your pulls and see how your pity state affects the odds. If you're at soft pity (pull 74+), your next 5★ is likely imminent — check the <a href="/guides/pity-system/">soft pity math</a> for exact probabilities. For budgeting across multiple banners, the <a href="/guides/primogem-planning/">primogem planning guide</a> breaks down F2P, Welkin, and BP income per patch.</p>
+</div>
+
+<div class="card">
+<h2>Genshin banner history: all character event banners by version</h2>
+<p>Below is a record of every character event banner since version 6.3. Each version has two phases, each lasting approximately 3 weeks. Use this table to look up past banners, check rerun patterns, and plan ahead for future reruns.</p>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:13px;margin:14px 0">
+<thead><tr><th style="text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);color:var(--cyan)">Version</th><th style="text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);color:var(--cyan)">Phase</th><th style="text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);color:var(--cyan)">Character</th><th style="text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);color:var(--cyan)">Element</th><th style="text-align:left;padding:8px 10px;border-bottom:2px solid var(--line);color:var(--cyan)">Dates</th></tr></thead>
+<tbody>
+${bannerHistory.versions.map(v => v.phases.map(p => `<tr><td style="padding:6px 10px;border-bottom:1px solid var(--line)">${esc(v.version)}</td><td style="padding:6px 10px;border-bottom:1px solid var(--line)">${esc(p.label)}</td><td style="padding:6px 10px;border-bottom:1px solid var(--line);color:var(--text)"><strong>${esc(p.character)}</strong></td><td style="padding:6px 10px;border-bottom:1px solid var(--line)">${esc(p.element)}</td><td style="padding:6px 10px;border-bottom:1px solid var(--line);color:var(--dim)">${esc(p.start)} → ${esc(p.end)}</td></tr>`).join('\n')).join('\n')}
+</tbody>
+</table>
+</div>
+<p>This history covers ${bannerHistory.versions.length} versions (${bannerHistory.versions[bannerHistory.versions.length - 1]?.version || 'N/A'}–${bannerHistory.versions[0]?.version || 'N/A'}). For the full banner schedule including weapon banners and 4-star rate-ups, check the official Genshin Impact wiki.</p>
 </div>
 
 <div class="card">

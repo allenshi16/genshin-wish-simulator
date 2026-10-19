@@ -64,24 +64,24 @@ const html = `<!doctype html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="The exact math behind Genshin Impact's pity system: 0.6% base rate, soft pity from pull 74, hard pity at 90, 50/50 odds, and guarantee carry-over — with a computed probability table." />
+    <meta name="description" content="Genshin pity tracker and counter: track your pity count, check soft pity at pull 74, hard pity at 90, and 50/50 guarantee status. Computed probability table included." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="${SITE}/guides/pity-system/" />
     <meta name="adsense-client" content="${process.env.ADSENSE_CLIENT || ''}" />
     <meta name="ga-measurement" content="${process.env.VITE_GA_ID || ''}" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Genshin Soft Pity Calculator: Exact Odds from Pull 74, Hard Pity & 50/50" />
+    <meta property="og:title" content="Genshin Pity Tracker &amp; Counter — Soft Pity at 74, Hard Pity 90" />
     <meta property="og:description" content="Computed probability table for Genshin's wish system: 74 soft pity, 90 hard pity, 50/50 and guarantee — plus median pulls and expected value." />
     <meta property="og:url" content="${SITE}/guides/pity-system/" />
     <meta property="og:image" content="${SITE}/og-card.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Genshin Soft Pity Calculator" />
-    <title>Genshin Soft Pity Calculator: Exact Odds, Hard Pity &amp; 50/50</title>
+    <meta name="twitter:title" content="Genshin Pity Tracker &amp; Counter" />
+    <title>Genshin Pity Tracker &amp; Counter — Soft Pity at 74</title>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "Genshin Soft Pity Calculator: Exact Odds from Pull 74, Hard Pity & 50/50 Explained",
+      "headline": "Genshin Pity Tracker & Counter: Track Soft Pity at 74, Hard Pity 90, and 50/50 Guarantee",
       "description": "Exact computed probabilities for the Genshin wish system: base 0.6%, soft pity from 74, hard pity 90, 50/50 and guarantee.",
       "url": "${SITE}/guides/pity-system/",
       "author": { "@type": "Organization", "name": "Astral Wish Lab" },
@@ -102,7 +102,9 @@ const html = `<!doctype html>
         { "@type": "Question", "name": "What is the median number of pulls for a 5-star?",
           "acceptedAnswer": { "@type": "Answer", "text": "The median is ${median} pulls — half of all players get their 5-star by then. 75% of players have one by pull ${p75}, and 90% by pull ${p90pull}." } },
         { "@type": "Question", "name": "Does pity carry over between banners?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pity count and the 50/50 guarantee both carry over between character event banners. A guaranteed featured character stays guaranteed until used." } }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pity count and the 50/50 guarantee both carry over between character event banners. A guaranteed featured character stays guaranteed until used." } },
+        { "@type": "Question", "name": "How do I check my pity counter in Genshin Impact?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Open the game, go to Wish, click History. Count the pulls since your last 5-star — that is your current pity. Enter it into a pity tracker to see your odds for the next pull." } }
       ]
     }
     </script>
@@ -135,7 +137,7 @@ const html = `<!doctype html>
     <main class="guide">
       <a class="back" href="/">← Back to Wish Simulator</a>
       <div class="kicker">Data · Wish Mechanics</div>
-      <h1>Genshin Soft Pity Calculator: Exact Odds from Pull 74 to Hard Pity 90</h1>
+      <h1>Genshin Pity Tracker &amp; Counter: Exact Odds from Pull 74 to Hard Pity 90</h1>
       <p class="lede">Every number below is computed from the standard character-banner model — 0.6% base rate, soft pity from pull 74, hard pity at pull 90, and the 50/50 with guarantee. No hand-waving, no "about" figures.</p>
 
       <div class="stat-grid">
@@ -164,6 +166,11 @@ ${cum.filter((c) => c.pull <= 10 || (c.pull >= 70 && c.pull <= 90)).map((c) =>
       <h2>50/50 and guarantee</h2>
       <p>Your first 5-star on a character banner is a 50/50: half the time it's the featured character, half the time a standard character. If you lose, the <strong>next 5-star is guaranteed</strong> to be the featured character. Both pity and the guarantee carry over between banners. Worst case for one featured character is therefore 180 pulls (90 hard pity + 90 guaranteed).</p>
 
+      <h2>How to track your pity counter</h2>
+      <p>Tracking your pity counter is straightforward. Open Genshin Impact, go to the Wish menu, and click on History. Count how many pulls you have made since your last 5-star — that number is your current pity. Enter it into the <a href="/">wish simulator</a> or any pity tracker to see your exact odds for the next pull.</p>
+      <p>To check whether you are on a guaranteed pity, look at your last 5-star in the wish history. If it was the featured character for that banner, you are on a 50/50. If it was a standard 5-star (or a non-featured character), your next 5-star is guaranteed to be the featured character. This guarantee carries over between all character event banners.</p>
+      <p>For weapon banners, the process is the same but the hard pity is 80 instead of 90, and the Epitomized Path (fate point) resets when the banner ends — unlike character pity which carries over permanently.</p>
+
       <h2>Try the math live</h2>
       <p>You can simulate these odds yourself with the <a href="/">free wish simulator</a> — it implements this exact model, tracks your 50/50 state, and shows your live pity. There are also <a href="/characters/venti/">per-character pages</a> with the same simulator embedded.</p>
 
@@ -174,6 +181,7 @@ ${cum.filter((c) => c.pull <= 10 || (c.pull >= 70 && c.pull <= 90)).map((c) =>
         <details><summary>How does the 50/50 work?</summary><p>Your first 5-star on a character banner has a 50% chance to be the featured character. If you lose the 50/50, the next 5-star is guaranteed to be the featured character.</p></details>
         <details><summary>What is the median number of pulls for a 5-star?</summary><p>The median is ${median} pulls — half of all players get their 5-star by then. 75% of players have one by pull ${p75}, and 90% by pull ${p90pull}.</p></details>
         <details><summary>Does pity carry over between banners?</summary><p>Yes. Pity count and the 50/50 guarantee both carry over between character event banners. A guaranteed featured character stays guaranteed until used.</p></details>
+        <details><summary>How do I check my pity counter in Genshin Impact?</summary><p>Open the game, go to Wish, click History. Count the pulls since your last 5-star — that is your current pity. Enter it into a pity tracker to see your odds for the next pull.</p></details>
       </section>
     </main>
     <div class="ad-slot" aria-hidden="true"></div>

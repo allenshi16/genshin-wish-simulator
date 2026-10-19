@@ -1,0 +1,60 @@
+{
+  "versions": [
+    {
+      "version": "7.1",
+      "phases": [
+        { "label": "Phase 1", "character": "Columbina", "element": "Cryo", "start": "2026-10-08", "end": "2026-10-28" },
+        { "label": "Phase 2", "character": "TBA", "element": "TBA", "start": "2026-10-28", "end": "2026-11-18" }
+      ]
+    },
+    {
+      "version": "7.0",
+      "phases": [
+        { "label": "Phase 1", "character": "Ineffa", "element": "Electro", "start": "2026-08-27", "end": "2026-09-17" },
+        { "label": "Phase 2", "character": "Mualani", "element": "Hydro", "start": "2026-09-17", "end": "2026-10-08" }
+      ]
+    },
+    {
+      "version": "6.8",
+      "phases": [
+        { "label": "Phase 1", "character": "Mavuika", "element": "Pyro", "start": "2026-07-16", "end": "2026-08-06" },
+        { "label": "Phase 2", "character": "Citlali", "element": "Cryo", "start": "2026-08-06", "end": "2026-08-27" }
+      ]
+    },
+    {
+      "version": "6.7",
+      "phases": [
+        { "label": "Phase 1", "character": "Sandrone", "element": "Cryo", "start": "2026-06-04", "end": "2026-06-25" },
+        { "label": "Phase 2", "character": "Columbina", "element": "Cryo", "start": "2026-06-25", "end": "2026-07-16" }
+      ]
+    },
+    {
+      "version": "6.6",
+      "phases": [
+        { "label": "Phase 1", "character": "Nahida", "element": "Dendro", "start": "2026-04-23", "end": "2026-05-14" },
+        { "label": "Phase 2", "character": "Arlecchino", "element": "Pyro", "start": "2026-05-14", "end": "2026-06-04" }
+      ]
+    },
+    {
+      "version": "6.5",
+      "phases": [
+        { "label": "Phase 1", "character": "Furina", "element": "Hydro", "start": "2026-03-12", "end": "2026-04-02" },
+        { "label": "Phase 2", "character": "Chasca", "element": "Anemo", "start": "2026-04-02", "end": "2026-04-23" }
+      ]
+    },
+    {
+      "version": "6.4",
+      "phases": [
+        { "label": "Phase 1", "character": "Hu Tao", "element": "Pyro", "start": "2026-01-29", "end": "2026-02-19" },
+        { "label": "Phase 2", "character": "Ganyu", "element": "Cryo", "start": "2026-02-19", "end": "2026-03-12" }
+      ]
+    },
+    {
+      "version": "6.3",
+      "phases": [
+        { "label": "Phase 1", "character": "Raiden Shogun", "element": "Electro", "start": "2025-12-18", "end": "2026-01-08" },
+        { "label": "Phase 2", "character": "Kazuha", "element": "Anemo", "start": "2026-01-08", "end": "2026-01-29" }
+      ]
+    }
+  ]
+}

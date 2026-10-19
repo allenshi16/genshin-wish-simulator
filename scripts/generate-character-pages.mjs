@@ -234,6 +234,7 @@ function main() {
   const guideEntries = [
     { loc: 'guides/pity-system/', lastmod: '2026-08-16' },
     { loc: 'guides/primogem-planning/', lastmod: '2026-09-06' },
+    { loc: 'genshin-wish-tracker/', lastmod: '2026-10-19' },
     { loc: 'privacy/', lastmod: '2026-09-18' },
   ]
     .map((g) => `  <url>\n    <loc>%VITE_SITE_URL%${g.loc}</loc>\n    <lastmod>${g.lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.9</priority>\n  </url>`)
