@@ -35,15 +35,82 @@
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What is a Genshin Impact wish simulator?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A wish simulator lets you rehearse character-event, weapon, and standard pulls without spending primogems in the real game. Astral Wish Lab simulates the exact pity model — 0.6% base rate, soft pity from pull 74, hard pity at 90, 50/50 with post-loss guarantee — and tracks your local wish statistics." } },
+          { "@type": "Question", "name": "How does the 50/50 system work in Genshin Impact?",
+            "acceptedAnswer": { "@type": "Answer", "text": "When you pull a 5-star on a character event banner, there is a 50% chance it is the featured character and a 50% chance it is a standard 5-star. If you lose the 50/50, your next 5-star on a character banner is guaranteed to be the featured character. Both pity count and the guarantee carry over between banners." } },
+          { "@type": "Question", "name": "When does soft pity start?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Soft pity begins at pull 74 on character banners. From pull 74 onward the 5-star rate climbs approximately 6% per pull until it reaches 100% at hard pity (pull 90). This is why most 5-stars arrive between pulls 74 and 82." } },
+          { "@type": "Question", "name": "Is this wish simulator accurate?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The simulator uses the same probability model as the real game: 0.6% base 5-star rate, soft pity ramp from pull 74, 90 hard pity, 50/50 featured check with post-loss guarantee, and 10-wish 4-star hard pity. Soft-pity curves are labelled approximations. Results are simulated locally in your browser." } },
+          { "@type": "Question", "name": "Do I need to log in or connect my game account?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Astral Wish Lab is completely free and requires no login, no game account, and no download. All wish history and collection data stays in your browser's local storage." } },
+          { "@type": "Question", "name": "How many primogems do I need per patch?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A free-to-play player earns roughly 4,000 to 6,000 primogems per patch (about 25 to 37 wishes). With Welkin Moon and Battle Pass combined, income rises to approximately 8,000 to 10,000 primogems per patch. Use the primogem planner on this page to calculate your exact budget." } },
+          { "@type": "Question", "name": "Does pity reset between banners?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Pity count and the 50/50 guarantee both carry over between character event banners. If you are at 70 pity now, you stay at 70 pity when the next character banner starts. The worst case for one featured character is 180 pulls (90 hard pity plus 90 guaranteed)." } },
+          { "@type": "Question", "name": "What is the difference between hard pity and soft pity?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Hard pity is the pull number at which a 5-star is guaranteed — pull 90 on character banners, pull 80 on weapon banners. Soft pity is the range before hard pity where the rate increases sharply — from pull 74 on character banners. Most players get their 5-star during the soft pity window, well before reaching hard pity." } }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root">
       <main class="static-fallback">
         <h1>Genshin Impact Wish Simulator and Pity Calculator</h1>
-        <p>Astral Wish Lab is an unofficial fan-made multi-banner Genshin wishing simulator. Test single or ten pulls on original character, weapon, and standard example banners, follow separate pity and guarantee states, collect fictional results, and plan how many primogems you may have before a banner ends.</p>
-        <h2>Genshin Wishing Simulator — character guarantee, weapon path, and primogem planning</h2>
-        <p>The character model uses a 0.6% base 5-star rate, 90-wish hard pity, a featured 50/50 with a guarantee after a loss, and a 10-wish 4-star-or-higher guarantee. The weapon example uses 80 hard pity and a simplified one-point path. Soft pity is explicitly approximate.</p>
-        <p>No login or game account is required. Wish history and the original fictional collection remain in this browser. Example banners do not represent current game data.</p>
+        <p>Astral Wish Lab is a free, unofficial Genshin Impact wish simulator. Test single or ten pulls on character-event, weapon, and standard banners — each using the real probability model: 0.6% base 5-star rate, soft pity from pull 74, hard pity at 90, 50/50 featured check with a post-loss guarantee, and a 10-wish 4-star-or-higher guarantee. No login, no game account, no download. All wish history and pull statistics stay in your browser.</p>
+        <p>Use the simulator above to rehearse pulls before spending primogems in the real game, then check the pity planner to see how many wishes you can afford before a banner ends. For the full probability breakdown, read the <a href="/guides/pity-system/">soft pity calculator and pity system math</a>. To plan your primogem budget across patches, see the <a href="/guides/primogem-planning/">primogem planning guide</a>.</p>
+
+        <h2>How to use this Genshin wishing simulator</h2>
+        <p>The simulator supports three banner types: character event, weapon event, and standard (permanent) banner. Select a banner tab at the top of the simulator to switch between them. Each banner tracks its own pity counter, guarantee state, and wish history independently.</p>
+        <p>To make a single pull, click the Wish x1 button. Each single wish costs 160 primogems (one Intertwined Fate or Acquaint Fate). To make ten pulls at once, click the Wish x10 button for 1,600 primogems. The ten-wish guarantee ensures at least one 4-star or higher item in every batch of ten.</p>
+        <p>After each pull, the simulator displays the results — character or weapon name, rarity, and whether the item is the featured rate-up. The pity counter updates automatically. If you pull a 5-star on a character banner, the simulator resolves the 50/50 check: 50% chance featured, 50% chance standard. If you lose the 50/50, the guarantee flag activates and your next 5-star is guaranteed featured.</p>
+        <p>The collection log tracks every unique item you have pulled across all sessions. Duplicate characters advance constellation levels; duplicate weapons advance refinement ranks. All data persists in your browser's local storage between visits.</p>
+
+        <h2>Genshin pity system: soft pity, hard pity, and the 50/50</h2>
+        <p>The pity system is the most important mechanic for any Genshin Impact player who pulls for 5-star characters. Here is exactly how it works on character event banners:</p>
+        <p><strong>Base rate:</strong> Every pull has a 0.6% chance to yield a 5-star item. This is the flat rate for pulls 1 through 73.</p>
+        <p><strong>Soft pity (pull 74 to 89):</strong> From pull 74 onward, the 5-star rate increases by approximately 6% per pull. Pull 74 is about 6.6%, pull 80 is about 42.6%, and by pull 89 the rate is near-certain. This is why the vast majority of 5-star pulls arrive between pulls 74 and 82 — rarely do players reach hard pity.</p>
+        <p><strong>Hard pity (pull 90):</strong> If you have not pulled a 5-star by your 89th wish, the 90th pull is guaranteed to be a 5-star. This is the absolute worst case. The median number of pulls for a 5-star is approximately 76 — half of all players get their 5-star by then.</p>
+        <p><strong>50/50 and guarantee:</strong> Your first 5-star on a character event banner has a 50% chance to be the featured rate-up character and a 50% chance to be a standard 5-star character. If you lose the 50/50 (pull a standard character), your next 5-star on any character event banner is guaranteed to be the featured character. Both the pity counter and the guarantee status carry over between banners.</p>
+        <p>The worst-case scenario for obtaining one featured 5-star character is therefore 180 pulls: 90 for the first 5-star (which you might lose the 50/50 on) plus another 90 for the guaranteed featured 5-star. The expected value is approximately 61.3 pulls per 5-star, or about 105 pulls to secure a featured character on average.</p>
+        <p>For the complete probability table computed from pull 1 to pull 90, see the <a href="/guides/pity-system/">pity system math guide with exact cumulative odds</a>.</p>
+
+        <h2>Weapon banner: epitome path and hard pity</h2>
+        <p>The weapon event banner uses a slightly different model. The base 5-star rate is 0.7% (slightly higher than the character banner), and hard pity is at 80 pulls instead of 90. Soft pity also applies on the weapon banner, starting from a similar pull threshold.</p>
+        <p>Weapon banners use the Epitome Path system (also called Fate Points). You select one weapon as your desired path target. If you pull a 5-star weapon that is not your selected path, you gain one Fate Point. At one Fate Point, the next 5-star weapon you pull is guaranteed to be your path target. Fate Points reset when the banner ends — they do not carry over to the next weapon banner, unlike character banner pity which does carry over.</p>
+        <p>This means the worst case for a specific weapon is 80 pulls (hard pity) if you win the path check on the first 5-star, or up to 160 pulls if you lose the first path check and need a second 5-star. Plan accordingly — weapon pulls are expensive and do not carry over.</p>
+
+        <h2>Primogem planning: how many pulls per patch</h2>
+        <p>Before pulling on any banner, it helps to know how many primogems you can realistically earn before the banner ends. A typical Genshin Impact patch lasts six weeks (two phases of about three weeks each).</p>
+        <p>Free-to-play income sources per patch include: daily commissions (approximately 2,520 primogems), the Spiral Abyss (600 primogems if you can clear floor 12), events (typically 1,000 to 2,000 primogems depending on the event roster), and maintenance compensation. Total F2P income averages roughly 4,000 to 6,000 primogems per patch, which translates to about 25 to 37 wishes.</p>
+        <p>If you purchase the Welkin Moon (monthly card), you gain an additional 30 primogems per day for 30 days, totaling about 4,000 extra primogems per patch. The Battle Pass (BP) adds roughly 1,300 primogems plus other resources. Combined Welkin and BP income brings the total to approximately 8,000 to 10,000 primogems per patch, or about 50 to 62 wishes.</p>
+        <p>Use the primogem planner section on this page to input your current primogems, estimated daily income, and days remaining on the banner. The planner calculates your projected wish count and estimates the probability of obtaining your target character or constellation level.</p>
+
+        <h2>Current banner and countdown</h2>
+        <p>Want to know when the current Genshin Impact banner ends? Check the <a href="/next-banner/">next banner page</a> for the current featured character, banner end date, and a live countdown timer. The page also includes speculation about the next phase's featured character based on the version schedule.</p>
+        <p>For a multi-timezone countdown showing the exact banner end time across NA, EU, and Asia servers, see the <a href="/countdown/">banner countdown timer</a>. Both pages link directly back to this simulator so you can rehearse your pulls before committing primogems.</p>
+
+        <h2>Per-character wish simulators</h2>
+        <p>In addition to the main simulator on this page, Astral Wish Lab provides individual wish simulator pages for specific characters. Each character page includes a dedicated pull simulator, a stat overview, pity mechanics explanation, and FAQ. Popular character simulators include:</p>
+        <p><a href="/characters/hu-tao/">Hu Tao wish simulator</a> · <a href="/characters/raiden-shogun/">Raiden Shogun wish simulator</a> · <a href="/characters/nahida/">Nahida wish simulator</a> · <a href="/characters/furina/">Furina wish simulator</a> · <a href="/characters/kazuha/">Kaedehara Kazuha wish simulator</a> · <a href="/characters/ayaka/">Kamisato Ayaka wish simulator</a> · <a href="/characters/zhongli/">Zhongli wish simulator</a> · <a href="/characters/ganyu/">Ganyu wish simulator</a> · <a href="/characters/yae-miko/">Yae Miko wish simulator</a> · <a href="/characters/neuvillette/">Neuvillette wish simulator</a> · <a href="/characters/mavuika/">Mavuika wish simulator</a> · <a href="/characters/citlali/">Citlali wish simulator</a></p>
+        <p>Browse all <a href="/characters/venti/">42 character wish simulators</a> to check pity, odds, and primogem budget for any specific 5-star character.</p>
+
+        <h2>Frequently asked questions</h2>
+        <p><strong>What is a Genshin Impact wish simulator?</strong> A wish simulator lets you rehearse character-event, weapon, and standard pulls without spending primogems in the real game. Astral Wish Lab simulates the exact pity model — 0.6% base rate, soft pity from pull 74, hard pity at 90, 50/50 with post-loss guarantee — and tracks your local wish statistics.</p>
+        <p><strong>How does the 50/50 system work in Genshin Impact?</strong> When you pull a 5-star on a character event banner, there is a 50% chance it is the featured character and a 50% chance it is a standard 5-star. If you lose the 50/50, your next 5-star on a character banner is guaranteed to be the featured character. Both pity count and the guarantee carry over between banners.</p>
+        <p><strong>When does soft pity start?</strong> Soft pity begins at pull 74 on character banners. From pull 74 onward the 5-star rate climbs approximately 6% per pull until it reaches 100% at hard pity (pull 90). This is why most 5-stars arrive between pulls 74 and 82.</p>
+        <p><strong>Is this wish simulator accurate?</strong> The simulator uses the same probability model as the real game: 0.6% base 5-star rate, soft pity ramp from pull 74, 90 hard pity, 50/50 featured check with post-loss guarantee, and 10-wish 4-star hard pity. Soft-pity curves are labelled approximations. Results are simulated locally in your browser — no server-side randomness.</p>
+        <p><strong>Do I need to log in or connect my game account?</strong> No. Astral Wish Lab is completely free and requires no login, no game account, and no download. All wish history and collection data stays in your browser's local storage. You can clear your data at any time using the reset button.</p>
+        <p><strong>How many primogems do I need per patch?</strong> A free-to-play player earns roughly 4,000 to 6,000 primogems per patch (about 25 to 37 wishes). With Welkin Moon and Battle Pass combined, income rises to approximately 8,000 to 10,000 primogems per patch. Use the primogem planner on this page to calculate your exact budget for the characters you want.</p>
+        <p><strong>Does pity reset between banners?</strong> No. Pity count and the 50/50 guarantee both carry over between character event banners. If you are at 70 pity now, you stay at 70 pity when the next character banner starts. The worst case for one featured character is 180 pulls (90 hard pity plus 90 guaranteed). Note that weapon banner Fate Points do reset when the weapon banner ends.</p>
+        <p><strong>What is the difference between hard pity and soft pity?</strong> Hard pity is the pull number at which a 5-star is guaranteed — pull 90 on character banners, pull 80 on weapon banners. Soft pity is the range before hard pity where the rate increases sharply — from pull 74 on character banners. Most players get their 5-star during the soft pity window, well before reaching hard pity.</p>
       </main>
     </div>
     <script type="module" src="/src/main.tsx"></script>
