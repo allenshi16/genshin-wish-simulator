@@ -48,9 +48,114 @@ function generateNextBanner() {
 
   const curChar = current.character
   const nxtChar = current.next
-  const isCurTBA = curChar.name === 'TBA'
-  const titlePrefix = isCurTBA ? 'Genshin Next Banner' : `Genshin Next Banner: ${curChar.name}`
-  const titleFull = `${titlePrefix} — Countdown & Next Phase`
+  const isCurTBA = curChar.name === 'TBA' || curChar.name === undefined
+  const isNxtTBA = nxtChar.character === 'TBA' || nxtChar.character === undefined
+  const now = new Date()
+  const endUtc = new Date(current.endUtc)
+  const isBannerEnded = now > endUtc
+  const isBannerNotStarted = now < new Date(current.startUtc)
+
+  // Determine page state
+  let pageState = 'active' // 'active' | 'ended' | 'not-started'
+  if (isBannerEnded) pageState = 'ended'
+  else if (isBannerNotStarted) pageState = 'not-started'
+
+  // Title format: "Genshin Next Banner: <character> + Countdown & Prediction"
+  const charDisplay = isCurTBA ? '' : `: ${curChar.name}`
+  const titleFull = `Genshin Next Banner${charDisplay} + Countdown & Prediction`
+
+  // Helper for conditional text
+  const charOrTBA = (val) => (val === 'TBA' || val === undefined ? 'To be announced' : val)
+  const elementOrTBA = () => isCurTBA ? 'To be announced' : curChar.element
+  const weaponOrTBA = () => isCurTBA ? 'To be announced' : curChar.weapon
+  const roleOrTBA = () => isCurTBA ? 'To be announced' : curChar.role
+
+  // Build stat row only if not TBA
+  const statRowHtml = isCurTBA ? '' : `
+    <div class="stat-row">
+      <span><b>${esc(curChar.element)}</b> Element</span>
+      <span><b>${esc(curChar.weapon)}</b> Weapon</span>
+      <span><b>${esc(curChar.role)}</b> Role</span>
+    </div>`
+
+  // Build 4-star display, filter out TBA
+  const fourStars = (current.fourStars || []).filter(s => s !== 'TBA' && s !== undefined)
+  const fourStarsHtml = fourStars.length > 0
+    ? `<p>4★ rate-up: ${fourStars.map(esc).join(', ')}</p>`
+    : '<p>4★ rate-up: To be announced</p>'
+
+  // H1 display
+  const h1Html = isCurTBA
+    ? '<h1>Genshin Next Banner</h1>'
+    : `<h1>Genshin Next Banner: <span class="star">${'★'.repeat(curChar.rarity || 5)}</span> ${esc(curChar.name)}</h1>`
+
+  // Intro paragraph
+  const introHtml = isCurTBA
+    ? '<p>The current Genshin Impact banner information is being updated. Check back soon for character details, countdown timer, and next phase prediction.</p>'
+    : `<p>The current Genshin Impact banner features <strong>${esc(curChar.name)}</strong> — a ${curChar.rarity}-star <strong>${esc(curChar.element)}</strong> ${esc(curChar.weapon)} user (${esc(curChar.role)}). Banner ends <strong>${formatDate(current.endUtc)}</strong>. Countdown and next-phase prediction below.</p>`
+
+  // Countdown card
+  const countdownLabelHtml = pageState === 'ended'
+    ? '<div class="countdown-label">This banner has ended</div>'
+    : '<div class="countdown-label">Current banner ends in</div>'
+
+  // Current banner card
+  const currentCardHtml = isCurTBA
+    ? `<div class="banner-card current">
+    <span class="tag tag-now">NOW</span>
+    <h2>Banner Details Pending</h2>
+    <p>Character information to be announced. Check back soon or visit the <a href="/">wish simulator</a> while you wait.</p>
+    <a class="sim-cta" href="/">Try the wish simulator →</a>
+  </div>`
+    : `<div class="banner-card current">
+    <span class="tag tag-now">NOW</span>
+    <h2>${esc(curChar.name)} <span class="star">${'★'.repeat(curChar.rarity || 5)}</span></h2>
+    ${statRowHtml}
+    ${fourStarsHtml}
+    <p>Phase: ${esc(current.label)} · Version ${esc(current.version)}</p>
+    <a class="sim-cta" href="/">Try the wish simulator →</a>
+  </div>`
+
+  // Next phase card
+  const nextCardHtml = isNxtTBA
+    ? `<div class="banner-card next-phase">
+    <span class="tag tag-next">NEXT</span>
+    <h2>To be announced</h2>
+    <p>Next phase character to be announced. Expected start: ${formatDate(next.startUtc)}</p>
+    <a class="sim-cta" href="/countdown/">See full countdown →</a>
+  </div>`
+    : `<div class="banner-card next-phase">
+    <span class="tag tag-next">NEXT</span>
+    ${nxtChar.speculated ? '<span class="tag tag-spec">SPECULATION</span>' : ''}
+    <h2>${esc(nxtChar.character)} <span class="star">${'★'.repeat(nxtChar.rarity || 5)}</span></h2>
+    <div class="stat-row">
+      <span><b>${esc(nxtChar.element)}</b> Element</span>
+      <span><b>${esc(nxtChar.weapon)}</b> Weapon</span>
+      <span><b>${esc(nxtChar.role)}</b> Role</span>
+    </div>
+    <p>Expected start: ${formatDate(next.startUtc)}</p>
+    <a class="sim-cta" href="/countdown/">See full countdown →</a>
+  </div>`
+
+  // "When does X banner end?" section
+  const whenEndsTitleHtml = isCurTBA ? 'When does the current banner end?' : `When does the ${esc(curChar.name)} banner end?`
+  const whenEndsBodyHtml = isCurTBA
+    ? '<p>Banner dates are being updated. Check the <a href="/countdown/">countdown page</a> for live timer information.</p>'
+    : `<p>The current character event banner featuring ${esc(curChar.name)} runs from ${formatDate(current.startUtc)} to <strong>${formatDate(current.endUtc)}</strong>. That gives you roughly ${Math.round((endUtc - new Date(current.startUtc)) / 86400000)} days. After this phase ends, the next phase (${next.label}) begins immediately with ${charOrTBA(nxtChar.character)}.</p>`
+
+  // "Should you pull for X or save for Y?" section
+  const pullOrSaveTitleHtml = isCurTBA && isNxtTBA
+    ? 'Planning your pulls'
+    : isCurTBA
+    ? `Should you save for ${charOrTBA(nxtChar.character)}?`
+    : isNxtTBA
+    ? `Should you pull for ${esc(curChar.name)} or save?`
+    : `Should you pull for ${esc(curChar.name)} or save for ${esc(nxtChar.character)}?`
+
+  // FAQ answer for "When is the next Genshin banner?"
+  const faqNextAnswer = isNxtTBA
+    ? `The next phase begins ${formatDate(next.startUtc)}. Character details to be announced.`
+    : `The next phase begins ${formatDate(next.startUtc)} with ${nxtChar.character}. Check the next banner page for live countdown and updates.`
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -70,13 +175,13 @@ function generateNextBanner() {
 <meta property="og:url" content="${CANONICAL_BASE}/next-banner/">
 <meta property="og:image" content="${CANONICAL_BASE}/og-card.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Genshin Next Banner: ${esc(curChar.name)} + Countdown">
+<meta name="twitter:title" content="${titleFull}">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "${titleFull}",
-  "description": "Current Genshin banner featuring ${esc(curChar.name)} ends ${formatDate(current.endUtc)}. Includes countdown, next phase speculation, and wish simulator.",
+  "description": "${isCurTBA ? 'Genshin Impact next banner information, countdown, and predictions.' : 'Current Genshin banner featuring ' + esc(curChar.name) + ' ends ' + formatDate(current.endUtc) + '. Includes countdown, next phase speculation, and wish simulator.'}",
   "url": "${CANONICAL_BASE}/next-banner/",
   "author": { "@type": "Organization", "name": "Astral Wish Lab" },
   "datePublished": "${schedule.updated}",
@@ -93,7 +198,7 @@ function generateNextBanner() {
     { "@type": "Question", "name": "Does pity reset between banners?",
       "acceptedAnswer": { "@type": "Answer", "text": "No. Pity carries over between all character event banners. If you are at 70 pity now, you stay at 70 pity when the next banner starts." } },
     { "@type": "Question", "name": "When is the next Genshin banner?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The next phase begins ${formatDate(next.startUtc)}${nxtChar.character !== 'TBA' ? ' with ' + nxtChar.character : ''}. Check the next banner page for live countdown and updates." } }
+      "acceptedAnswer": { "@type": "Answer", "text": "${faqNextAnswer}" } }
   ]
 }
 </script>
@@ -138,50 +243,28 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
 <div class="wrap">
 <p><a href="/">← Back to Astral Wish Lab — Genshin Wish Simulator</a></p>
 
-<h1>Genshin Next Banner: <span class="star">${'★'.repeat(curChar.rarity)}</span> ${esc(curChar.name)}</h1>
-<p>The current Genshin Impact banner features <strong>${esc(curChar.name)}</strong> — a ${curChar.rarity}-star <strong>${esc(curChar.element)}</strong> ${esc(curChar.weapon)} user (${esc(curChar.role)}). Banner ends <strong>${formatDate(current.endUtc)}</strong>. Countdown and next-phase prediction below.</p>
+${h1Html}
+${introHtml}
 
 <div class="card">
-<div class="countdown-label">Current banner ends in</div>
+${countdownLabelHtml}
 <div class="countdown" id="countdown" data-end="${current.endUtc}">—</div>
 <div class="tz-row" id="tzRow"></div>
 </div>
 
 <div class="banner-grid">
-  <div class="banner-card current">
-    <span class="tag tag-now">NOW</span>
-    <h2>${esc(curChar.name)} <span class="star">${'★'.repeat(curChar.rarity)}</span></h2>
-    <div class="stat-row">
-      <span><b>${esc(curChar.element)}</b> Element</span>
-      <span><b>${esc(curChar.weapon)}</b> Weapon</span>
-      <span><b>${esc(curChar.role)}</b> Role</span>
-    </div>
-    <p>4★ rate-up: ${current.fourStars.map(esc).join(', ')}</p>
-    <p>Phase: ${esc(current.label)} · Version ${esc(current.version)}</p>
-    <a class="sim-cta" href="/">Try the wish simulator →</a>
-  </div>
-  <div class="banner-card next-phase">
-    <span class="tag tag-next">NEXT</span>
-    ${nxtChar.speculated ? '<span class="tag tag-spec">SPECULATION</span>' : ''}
-    <h2>${esc(nxtChar.character)} ${nxtChar.character !== 'TBA' ? '<span class="star">' + '★'.repeat(nxtChar.rarity) + '</span>' : ''}</h2>
-    ${nxtChar.character !== 'TBA' ? `<div class="stat-row">
-      <span><b>${esc(nxtChar.element)}</b> Element</span>
-      <span><b>${esc(nxtChar.weapon)}</b> Weapon</span>
-      <span><b>${esc(nxtChar.role)}</b> Role</span>
-    </div>` : '<p>Next phase character to be announced.</p>'}
-    <p>Expected start: ${formatDate(next.startUtc)}</p>
-    <a class="sim-cta" href="/countdown/">See full countdown →</a>
-  </div>
+  ${currentCardHtml}
+  ${nextCardHtml}
 </div>
 
 <div class="card">
-<h2>When does the ${esc(curChar.name)} banner end?</h2>
-<p>The current character event banner featuring ${esc(curChar.name)} runs from ${formatDate(current.startUtc)} to <strong>${formatDate(current.endUtc)}</strong>. That gives you roughly ${Math.round((new Date(current.endUtc) - new Date(current.startUtc)) / 86400000)} days. After this phase ends, the next phase (${next.label}) begins immediately with ${esc(nxtChar.character)}.</p>
+<h2>${whenEndsTitleHtml}</h2>
+${whenEndsBodyHtml}
 <p>Both pity and the 50/50 guarantee carry over between phases and versions, so pulls spent now still count toward future banners.</p>
 </div>
 
 <div class="card">
-<h2>Should you pull for ${esc(curChar.name)} or save for ${esc(nxtChar.character)}?</h2>
+<h2>${pullOrSaveTitleHtml}</h2>
 <p>Use the <a href="/">wish simulator</a> to rehearse your pulls and see how your pity state affects the odds. If you're at soft pity (pull 74+), your next 5★ is likely imminent — check the <a href="/guides/pity-system/">soft pity math</a> for exact probabilities. For budgeting across multiple banners, the <a href="/guides/primogem-planning/">primogem planning guide</a> breaks down F2P, Welkin, and BP income per patch.</p>
 </div>
 
@@ -204,7 +287,7 @@ ${bannerHistory.versions.map(v => v.phases.map(p => `<tr><td style="padding:6px 
 <ul class="faq-list">
 <li><h3>How long does a Genshin banner last?</h3><p>Each phase lasts about 3 weeks (21 days). A version typically has two phases, so a version lasts about 6 weeks.</p></li>
 <li><h3>Does pity reset between banners?</h3><p>No. Pity carries over between all character event banners. If you're at 70 pity now, you stay at 70 pity when the next banner starts. See the <a href="/guides/pity-system/">full pity breakdown</a>.</p></li>
-<li><h3>When is the next Genshin banner?</h3><p>The next phase begins ${formatDate(next.startUtc)}${nxtChar.character !== 'TBA' ? ' with ' + esc(nxtChar.character) : ''}. Check this page for live countdown and updates.</p></li>
+<li><h3>When is the next Genshin banner?</h3><p>${faqNextAnswer}</p></li>
 </ul>
 </div>
 
@@ -242,7 +325,12 @@ ${bannerHistory.versions.map(v => v.phases.map(p => `<tr><td style="padding:6px 
   function tick() {
     var now = Date.now();
     var diff = end - now;
-    if (diff <= 0) { el.textContent = 'Banner has ended'; return; }
+    if (diff <= 0) {
+      el.textContent = 'Awaiting update';
+      var label = document.querySelector('.countdown-label');
+      if (label) label.textContent = 'This banner has ended. Data will be updated soon.';
+      return;
+    }
     var d = Math.floor(diff / 86400000);
     var h = Math.floor((diff % 86400000) / 3600000);
     var m = Math.floor((diff % 3600000) / 60000);

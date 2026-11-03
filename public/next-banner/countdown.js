@@ -23,7 +23,12 @@
   function tick() {
     var now = Date.now();
     var diff = end - now;
-    if (diff <= 0) { el.textContent = 'Banner has ended'; return; }
+    if (diff <= 0) {
+      el.textContent = 'Awaiting update';
+      var label = document.querySelector('.countdown-label');
+      if (label) label.textContent = 'This banner has ended. Data will be updated soon.';
+      return;
+    }
     var d = Math.floor(diff / 86400000);
     var h = Math.floor((diff % 86400000) / 3600000);
     var m = Math.floor((diff % 3600000) / 60000);
