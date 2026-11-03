@@ -20,7 +20,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DATA_FILE = join(ROOT, 'scripts', 'banner-schedule.json')
 const CANONICAL_BASE = 'https://genshinwishsimulator.app'
 const ADSENSE_CLIENT = (process.env.ADSENSE_CLIENT || '').trim()
-const GA_ID = (process.env.VITE_GA_ID || '').trim()
+const GA_ID = 'G-HGMKQ47FZK'
 
 const schedule = JSON.parse(readFileSync(DATA_FILE, 'utf8'))
 const current = schedule.phases[0]

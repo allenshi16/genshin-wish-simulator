@@ -68,7 +68,7 @@ const html = `<!doctype html>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="${SITE}/guides/pity-system/" />
     <meta name="adsense-client" content="${process.env.ADSENSE_CLIENT || ''}" />
-    <meta name="ga-measurement" content="${process.env.VITE_GA_ID || ''}" />
+    <meta name="ga-measurement" content="G-HGMKQ47FZK" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Genshin Pity Tracker &amp; Counter — Soft Pity at 74, Hard Pity 90" />
     <meta property="og:description" content="Computed probability table for Genshin's wish system: 74 soft pity, 90 hard pity, 50/50 and guarantee — plus median pulls and expected value." />

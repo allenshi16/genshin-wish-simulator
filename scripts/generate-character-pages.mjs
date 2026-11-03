@@ -27,7 +27,7 @@ const CANONICAL_BASE = 'https://genshinwishsimulator.app'
 // AdSense publisher id (e.g. ca-pub-1234567890123456). Empty = ads disabled.
 const ADSENSE_CLIENT = (process.env.ADSENSE_CLIENT || '').trim()
 // GA4 measurement id (e.g. G-XXXXXXXXXX). Empty = analytics disabled.
-const GA_ID = (process.env.VITE_GA_ID || '').trim()
+const GA_ID = 'G-HGMKQ47FZK'
 
 const data = JSON.parse(readFileSync(DATA_FILE, 'utf8'))
 const characters = data.characters

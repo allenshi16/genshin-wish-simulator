@@ -58,7 +58,7 @@ const html = `<!DOCTYPE html>
 <meta name="robots" content="index,follow">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="adsense-client" content="${process.env.ADSENSE_CLIENT || ''}">
-<meta name="ga-measurement" content="${process.env.VITE_GA_ID || ''}">
+<meta name="ga-measurement" content="G-HGMKQ47FZK">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Genshin Wish Tracker & Pity Counter — Free, No Login">
 <meta property="og:description" content="Track your Genshin Impact pity, log wishes, monitor soft pity at 74 and 50/50 guarantee. Free wish tracker with no login required.">

@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url'
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const SITE = 'https://genshinwishsimulator.app'
 const ADSENSE_CLIENT = (process.env.ADSENSE_CLIENT || '').trim()
-const GA_ID = (process.env.VITE_GA_ID || '').trim()
+const GA_ID = 'G-HGMKQ47FZK'
 
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
