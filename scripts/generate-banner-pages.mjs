@@ -48,13 +48,16 @@ function generateNextBanner() {
 
   const curChar = current.character
   const nxtChar = current.next
+  const isCurTBA = curChar.name === 'TBA'
+  const titlePrefix = isCurTBA ? 'Genshin Next Banner' : `Genshin Next Banner: ${curChar.name}`
+  const titleFull = `${titlePrefix} — Countdown & Next Phase`
 
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Genshin Next Banner: ${esc(curChar.name)} ${curChar.element} + Upcoming Leaks</title>
+<title>${titleFull}</title>
 <meta name="description" content="When does the current Genshin Impact banner end? ${esc(curChar.name)} is up now until ${formatDate(current.endUtc)}. See the countdown, next banner prediction, and jump into the wish simulator.">
 <link rel="canonical" href="${CANONICAL_BASE}/next-banner/">
 <meta name="robots" content="index,follow">
@@ -62,7 +65,7 @@ function generateNextBanner() {
 <meta name="ga-measurement" content="${GA_ID}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Genshin Next Banner: ${esc(curChar.name)} + Countdown & Prediction">
+<meta property="og:title" content="${titleFull}">
 <meta property="og:description" content="Current banner ends ${formatDate(current.endUtc)}. See the next Genshin banner prediction, countdown timer, and wish simulator.">
 <meta property="og:url" content="${CANONICAL_BASE}/next-banner/">
 <meta property="og:image" content="${CANONICAL_BASE}/og-card.svg">
@@ -72,12 +75,26 @@ function generateNextBanner() {
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Genshin Next Banner: ${esc(curChar.name)} Current Banner + Upcoming Prediction",
+  "headline": "${titleFull}",
   "description": "Current Genshin banner featuring ${esc(curChar.name)} ends ${formatDate(current.endUtc)}. Includes countdown, next phase speculation, and wish simulator.",
   "url": "${CANONICAL_BASE}/next-banner/",
   "author": { "@type": "Organization", "name": "Astral Wish Lab" },
   "datePublished": "${schedule.updated}",
   "dateModified": "${schedule.updated}"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How long does a Genshin banner last?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Each phase lasts about 3 weeks (21 days). A version typically has two phases, so a version lasts about 6 weeks." } },
+    { "@type": "Question", "name": "Does pity reset between banners?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Pity carries over between all character event banners. If you are at 70 pity now, you stay at 70 pity when the next banner starts." } },
+    { "@type": "Question", "name": "When is the next Genshin banner?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The next phase begins ${formatDate(next.startUtc)}${nxtChar.character !== 'TBA' ? ' with ' + nxtChar.character : ''}. Check the next banner page for live countdown and updates." } }
+  ]
 }
 </script>
 <style>
@@ -146,8 +163,8 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
   <div class="banner-card next-phase">
     <span class="tag tag-next">NEXT</span>
     ${nxtChar.speculated ? '<span class="tag tag-spec">SPECULATION</span>' : ''}
-    <h2>${esc(nxtChar.name)} ${nxtChar.name !== 'TBA' ? '<span class="star">' + '★'.repeat(nxtChar.rarity) + '</span>' : ''}</h2>
-    ${nxtChar.name !== 'TBA' ? `<div class="stat-row">
+    <h2>${esc(nxtChar.character)} ${nxtChar.character !== 'TBA' ? '<span class="star">' + '★'.repeat(nxtChar.rarity) + '</span>' : ''}</h2>
+    ${nxtChar.character !== 'TBA' ? `<div class="stat-row">
       <span><b>${esc(nxtChar.element)}</b> Element</span>
       <span><b>${esc(nxtChar.weapon)}</b> Weapon</span>
       <span><b>${esc(nxtChar.role)}</b> Role</span>
@@ -159,12 +176,12 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
 
 <div class="card">
 <h2>When does the ${esc(curChar.name)} banner end?</h2>
-<p>The current character event banner featuring ${esc(curChar.name)} runs from ${formatDate(current.startUtc)} to <strong>${formatDate(current.endUtc)}</strong>. That gives you roughly ${Math.round((new Date(current.endUtc) - new Date(current.startUtc)) / 86400000)} days. After this phase ends, the next phase (${next.label}) begins immediately with ${esc(nxtChar.name)}.</p>
+<p>The current character event banner featuring ${esc(curChar.name)} runs from ${formatDate(current.startUtc)} to <strong>${formatDate(current.endUtc)}</strong>. That gives you roughly ${Math.round((new Date(current.endUtc) - new Date(current.startUtc)) / 86400000)} days. After this phase ends, the next phase (${next.label}) begins immediately with ${esc(nxtChar.character)}.</p>
 <p>Both pity and the 50/50 guarantee carry over between phases and versions, so pulls spent now still count toward future banners.</p>
 </div>
 
 <div class="card">
-<h2>Should you pull for ${esc(curChar.name)} or save for ${esc(nxtChar.name)}?</h2>
+<h2>Should you pull for ${esc(curChar.name)} or save for ${esc(nxtChar.character)}?</h2>
 <p>Use the <a href="/">wish simulator</a> to rehearse your pulls and see how your pity state affects the odds. If you're at soft pity (pull 74+), your next 5★ is likely imminent — check the <a href="/guides/pity-system/">soft pity math</a> for exact probabilities. For budgeting across multiple banners, the <a href="/guides/primogem-planning/">primogem planning guide</a> breaks down F2P, Welkin, and BP income per patch.</p>
 </div>
 
@@ -187,7 +204,7 @@ ${bannerHistory.versions.map(v => v.phases.map(p => `<tr><td style="padding:6px 
 <ul class="faq-list">
 <li><h3>How long does a Genshin banner last?</h3><p>Each phase lasts about 3 weeks (21 days). A version typically has two phases, so a version lasts about 6 weeks.</p></li>
 <li><h3>Does pity reset between banners?</h3><p>No. Pity carries over between all character event banners. If you're at 70 pity now, you stay at 70 pity when the next banner starts. See the <a href="/guides/pity-system/">full pity breakdown</a>.</p></li>
-<li><h3>When is the next Genshin banner?</h3><p>The next phase begins ${formatDate(next.startUtc)}${nxtChar.name !== 'TBA' ? ' with ' + esc(nxtChar.name) : ''}. Check this page for live countdown and updates.</p></li>
+<li><h3>When is the next Genshin banner?</h3><p>The next phase begins ${formatDate(next.startUtc)}${nxtChar.character !== 'TBA' ? ' with ' + esc(nxtChar.character) : ''}. Check this page for live countdown and updates.</p></li>
 </ul>
 </div>
 
