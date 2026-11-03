@@ -1142,5 +1142,36 @@ generateWuwaCharacters()
 generateCameraSettings()
 generateNoy()
 generateWuwaSimulator()
+updateSitemap()
 
 console.log('All Wuthering Waves pages generated successfully.')
+
+// ──────────────────────────────────────────────
+// Update sitemap with Wuwa pages
+// ──────────────────────────────────────────────
+function updateSitemap() {
+  const sitemapPath = join(ROOT, 'public', 'sitemap.xml')
+  let sitemap = readFileSync(sitemapPath, 'utf8')
+
+  const wuwaPages = [
+    { loc: 'wuthering-waves/', changefreq: 'weekly', priority: '0.9' },
+    { loc: 'wuthering-waves/hsin/', changefreq: 'weekly', priority: '0.8' },
+    { loc: 'wuthering-waves/codes/', changefreq: 'daily', priority: '0.9' },
+    { loc: 'wuthering-waves/next-banner/', changefreq: 'daily', priority: '0.8' },
+    { loc: 'wuthering-waves/characters/', changefreq: 'weekly', priority: '0.8' },
+    { loc: 'wuthering-waves/wish-simulator/', changefreq: 'monthly', priority: '0.7' },
+    { loc: 'guides/wuthering-waves-camera-settings/', changefreq: 'monthly', priority: '0.7' },
+    { loc: 'characters/noy/', changefreq: 'weekly', priority: '0.7' },
+  ]
+
+  wuwaPages.forEach((entry) => {
+    const pattern = `<loc>%VITE_SITE_URL%${entry.loc}</loc>`
+    if (sitemap.includes(pattern)) return // already present
+    const urlBlock = `  <url>\n    <loc>%VITE_SITE_URL%${entry.loc}</loc>\n    <changefreq>${entry.changefreq}</changefreq>\n    <priority>${entry.priority}</priority>\n  </url>`
+    // Insert before closing </urlset>
+    sitemap = sitemap.replace('</urlset>', urlBlock + '\n</urlset>')
+  })
+
+  writeFileSync(sitemapPath, sitemap, 'utf8')
+  console.log('Sitemap updated with Wuwa pages')
+}
