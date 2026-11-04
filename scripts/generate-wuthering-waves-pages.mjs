@@ -1049,7 +1049,14 @@ function generateWuwaSimulator() {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
-      }
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Astral Wish Lab",
+        "url": "${SITE}"
+      },
+      "datePublished": "2026-11-03",
+      "dateModified": "2026-11-05"
     }
     </script>
     <style>

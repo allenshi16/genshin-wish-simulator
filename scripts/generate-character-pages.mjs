@@ -109,6 +109,13 @@ function pageHtml(c, index, all) {
     isAccessibleForFree: true,
     description: desc,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: {
+      '@type': 'Organization',
+      name: 'Astral Wish Lab',
+      url: CANONICAL_BASE,
+    },
+    datePublished: '2026-08-20',
+    dateModified: '2026-11-05',
   }
 
   const nav = [

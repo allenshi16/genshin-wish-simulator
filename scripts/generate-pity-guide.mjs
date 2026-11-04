@@ -84,8 +84,13 @@ const html = `<!doctype html>
       "headline": "Genshin Pity Tracker & Counter: Track Soft Pity at 74, Hard Pity 90, and 50/50 Guarantee",
       "description": "Exact computed probabilities for the Genshin wish system: base 0.6%, soft pity from 74, hard pity 90, 50/50 and guarantee.",
       "url": "${SITE}/guides/pity-system/",
-      "author": { "@type": "Organization", "name": "Astral Wish Lab" },
-      "datePublished": "2026-08-16"
+      "author": {
+        "@type": "Organization",
+        "name": "Astral Wish Lab",
+        "url": "${SITE}"
+      },
+      "datePublished": "2026-08-16",
+      "dateModified": "2026-11-05"
     }
     </script>
     <script type="application/ld+json">

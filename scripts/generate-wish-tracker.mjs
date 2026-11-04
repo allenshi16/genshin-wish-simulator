@@ -76,7 +76,14 @@ const html = `<!DOCTYPE html>
   "operatingSystem": "Any",
   "isAccessibleForFree": true,
   "description": "Track your Genshin Impact wishes, pity counter, and 50/50 guarantee status. Free, no login, all data stays in your browser.",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": {
+    "@type": "Organization",
+    "name": "Astral Wish Lab",
+    "url": "${SITE}"
+  },
+  "datePublished": "2026-09-15",
+  "dateModified": "2026-11-05"
 }
 </script>
 <script type="application/ld+json">
