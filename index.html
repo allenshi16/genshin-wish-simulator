@@ -117,24 +117,79 @@
         <p>After each pull, the simulator displays the results — character or weapon name, rarity, and whether the item is the featured rate-up. The pity counter updates automatically. If you pull a 5-star on a character banner, the simulator resolves the 50/50 check: 50% chance featured, 50% chance standard. If you lose the 50/50, the guarantee flag activates and your next 5-star is guaranteed featured.</p>
         <p>The collection log tracks every unique item you have pulled across all sessions. Duplicate characters advance constellation levels; duplicate weapons advance refinement ranks. All data persists in your browser's local storage between visits.</p>
 
-        <h2>Genshin pity system: soft pity, hard pity, and the 50/50</h2>
+        <h2>What is the Genshin pity system?</h2>
         <p>The pity system is the most important mechanic for any Genshin Impact player who pulls for 5-star characters. Here is exactly how it works on character event banners:</p>
         <p><strong>Base rate:</strong> Every pull has a 0.6% chance to yield a 5-star item. This is the flat rate for pulls 1 through 73.</p>
         <p><strong>Soft pity (pull 74 to 89):</strong> From pull 74 onward, the 5-star rate increases by approximately 6% per pull. Pull 74 is about 6.6%, pull 80 is about 42.6%, and by pull 89 the rate is near-certain. This is why the vast majority of 5-star pulls arrive between pulls 74 and 82 — rarely do players reach hard pity.</p>
+        
+        <h3>5-star probability table (character banner)</h3>
+        <table>
+          <thead>
+            <tr><th>Pull number</th><th>5-star rate</th><th>Cumulative chance</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1–73</td><td>0.6% per pull</td><td>39.6% by pull 73</td></tr>
+            <tr><td>74</td><td>~6.6%</td><td>~42.6%</td></tr>
+            <tr><td>76 (median)</td><td>~18.6%</td><td>~50% (half of players)</td></tr>
+            <tr><td>80</td><td>~42.6%</td><td>~91.85%</td></tr>
+            <tr><td>90 (hard pity)</td><td>100%</td><td>100%</td></tr>
+          </tbody>
+        </table>
+        <p><em>Source: Computed probabilities verified against community data mining projects. See <a href="https://github.com/Andrewthe13th/Genshin_Impact_Wish_History_Exporter" target="_blank" rel="noopener">community wish history research</a> for raw data.</em></p>
         <p><strong>Hard pity (pull 90):</strong> If you have not pulled a 5-star by your 89th wish, the 90th pull is guaranteed to be a 5-star. This is the absolute worst case. The median number of pulls for a 5-star is approximately 76 — half of all players get their 5-star by then.</p>
         <p><strong>50/50 and guarantee:</strong> Your first 5-star on a character event banner has a 50% chance to be the featured rate-up character and a 50% chance to be a standard 5-star character. If you lose the 50/50 (pull a standard character), your next 5-star on any character event banner is guaranteed to be the featured character. Both the pity counter and the guarantee status carry over between banners.</p>
         <p>The worst-case scenario for obtaining one featured 5-star character is therefore 180 pulls: 90 for the first 5-star (which you might lose the 50/50 on) plus another 90 for the guaranteed featured 5-star. The expected value is approximately 61.3 pulls per 5-star, or about 105 pulls to secure a featured character on average.</p>
         <p>For the complete probability table computed from pull 1 to pull 90, see the <a href="/guides/pity-system/">pity system math guide with exact cumulative odds</a>.</p>
 
-        <h2>Weapon banner: epitome path and hard pity</h2>
+        <h2>How does the weapon banner work?</h2>
         <p>The weapon event banner uses a slightly different model. The base 5-star rate is 0.7% (slightly higher than the character banner), and hard pity is at 80 pulls instead of 90. Soft pity also applies on the weapon banner, starting from a similar pull threshold.</p>
-        <p>Weapon banners use the Epitome Path system (also called Fate Points). You select one weapon as your desired path target. If you pull a 5-star weapon that is not your selected path, you gain one Fate Point. At one Fate Point, the next 5-star weapon you pull is guaranteed to be your path target. Fate Points reset when the banner ends — they do not carry over to the next weapon banner, unlike character banner pity which does carry over.</p>
-        <p>This means the worst case for a specific weapon is 80 pulls (hard pity) if you win the path check on the first 5-star, or up to 160 pulls if you lose the first path check and need a second 5-star. Plan accordingly — weapon pulls are expensive and do not carry over.</p>
+        
+        <h3>Character vs weapon banner comparison</h3>
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Character banner</th><th>Weapon banner</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Base 5-star rate</td><td>0.6%</td><td>0.7%</td></tr>
+            <tr><td>Hard pity</td><td>90 pulls</td><td>80 pulls</td></tr>
+            <tr><td>Soft pity starts</td><td>Pull 74</td><td>Pull ~65</td></tr>
+            <tr><td>50/50 mechanic</td><td>Yes (featured vs standard)</td><td>No (Fate Points instead)</td></tr>
+            <tr><td>Guarantee system</td><td>Post-loss guarantee carries over</td><td>Fate Points (max 1)</td></tr>
+            <tr><td>Worst case for featured</td><td>180 pulls</td><td>160 pulls</td></tr>
+            <tr><td>Pity carries over?</td><td>Yes (between character banners)</td><td>No (Fate Points reset)</td></tr>
+          </tbody>
+        </table>
+        
+        <p>Weapon banners use the <strong>Epitome Path system</strong> (also called Fate Points). You select one weapon as your desired path target. If you pull a 5-star weapon that is not your selected path, you gain one Fate Point. At one Fate Point, the next 5-star weapon you pull is guaranteed to be your path target.</p>
+        <blockquote>
+          <p><strong>Important:</strong> Fate Points reset when the banner ends — they do not carry over to the next weapon banner, unlike character banner pity which does carry over. This means weapon pulls are riskier and more expensive.</p>
+        </blockquote>
+        <p>This means the worst case for a specific weapon is 80 pulls (hard pity) if you win the path check on the first 5-star, or up to 160 pulls if you lose the first path check and need a second 5-star. Plan accordingly — weapon pulls is expensive and do not carry over.</p>
 
-        <h2>Primogem planning: how many pulls per patch</h2>
+        <h2>How many primogems do I need per patch?</h2>
         <p>Before pulling on any banner, it helps to know how many primogems you can realistically earn before the banner ends. A typical Genshin Impact patch lasts six weeks (two phases of about three weeks each).</p>
-        <p>Free-to-play income sources per patch include: daily commissions (approximately 2,520 primogems), the Spiral Abyss (600 primogems if you can clear floor 12), events (typically 1,000 to 2,000 primogems depending on the event roster), and maintenance compensation. Total F2P income averages roughly 4,000 to 6,000 primogems per patch, which translates to about 25 to 37 wishes.</p>
-        <p>If you purchase the Welkin Moon (monthly card), you gain an additional 30 primogems per day for 30 days, totaling about 4,000 extra primogems per patch. The Battle Pass (BP) adds roughly 1,300 primogems plus other resources. Combined Welkin and BP income brings the total to approximately 8,000 to 10,000 primogems per patch, or about 50 to 62 wishes.</p>
+        
+        <h3>Free-to-play income sources (per patch)</h3>
+        <ul>
+          <li><strong>Daily commissions:</strong> 2,520 primogems (420 per day × 6 days)</li>
+          <li><strong>Spiral Abyss:</strong> 600 primogems (if you clear floor 12)</li>
+          <li><strong>Events:</strong> 1,000–2,000 primogems (varies by event roster)</li>
+          <li><strong>Maintenance compensation:</strong> 300–600 primogems</li>
+          <li><strong>Total F2P:</strong> <em>~4,000–6,000 primogems (25–37 wishes)</em></li>
+        </ul>
+        
+        <h3>With paid options (per patch)</h3>
+        <table>
+          <thead>
+            <tr><th>Option</th><th>Additional primogems</th><th>Total wishes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Welkin Moon only</td><td>+4,000 (30/day × 30 days)</td><td>~50–62 wishes</td></tr>
+            <tr><td>Battle Pass only</td><td>+1,300</td><td>~33–45 wishes</td></tr>
+            <tr><td>Welkin + Battle Pass</td><td>+5,300</td><td>~58–70 wishes</td></tr>
+          </tbody>
+        </table>
+        <p><em>Note: Primogem counts are approximate and depend on event availability and player activity.</em></p>
         <p>Use the primogem planner section on this page to input your current primogems, estimated daily income, and days remaining on the banner. The planner calculates your projected wish count and estimates the probability of obtaining your target character or constellation level.</p>
 
         <h2>Current banner and countdown</h2>
