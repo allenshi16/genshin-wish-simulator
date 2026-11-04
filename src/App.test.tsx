@@ -53,4 +53,15 @@ describe('simulator pull lifecycle', () => {
     expect(screen.getAllByText('Refinement 5+')).toHaveLength(4)
     vi.restoreAllMocks()
   })
+
+  it('renders SemiLaunch and Firsto badges in the homepage footer', () => {
+    render(<App />)
+    const semi = screen.getByRole('link', { name: 'Featured on SemiLaunch' })
+    expect(semi).toHaveAttribute('href', 'https://semilaunch.com')
+    expect(semi.querySelector('img')).toHaveAttribute('src', '/badges/semilaunch.png')
+    const firsto = screen.getByRole('link', { name: 'Astral Wish Lab — Launched on Firsto' })
+    expect(firsto).toHaveAttribute('href', 'https://firsto.co')
+    expect(firsto).toHaveAttribute('title', 'Astral Wish Lab — Launched on Firsto')
+    expect(firsto.querySelector('img')).toHaveAttribute('src', '/badges/find-us-on-firsto.svg')
+  })
 })
