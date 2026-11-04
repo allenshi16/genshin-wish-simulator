@@ -148,7 +148,18 @@ function App() {
         <section className="method" id="method"><div><p className="eyebrow">TRANSPARENT MODELS</p><h2>Simulation,<br />not server prophecy.</h2></div><div className="method-copy"><p>The Genshin pity calculator for character and standard examples uses a 0.6% base 5★ rate and 90 hard pity. Character events add a 50/50 featured check with a post-loss guarantee.</p><p>The weapon banner simulator uses a 0.7% base 5★ rate, 80 hard pity, a simplified 75% featured check, and one fate point toward the selected instrument. Soft-pity curves are labelled approximations, not verified server behavior.</p><p>All names, portraits, banners, and instruments on this page are original fictional examples. This tool is not affiliated with or endorsed by HoYoverse.</p></div></section>
       </main>
       <div className="ad-slot" aria-hidden="true"></div>
-      <footer><div className="brand"><span className="brand-mark">✦</span><span>ASTRAL <b>WISH LAB</b></span></div><p>Unofficial fan-made simulator with an original example roster. No official logos, character art, account credentials, or current game banner data are used.</p><nav aria-label="Footer navigation"><a href="/guides/pity-system/">Pity system &amp; soft pity math</a> · <a href="/guides/primogem-planning/">Primogem planning guide</a> · <a href="/next-banner/">Next banner</a> · <a href="/countdown/">Banner countdown</a></nav><a href="#top">Back to orbit ↑</a> · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><a className="semilaunch-badge" href="https://semilaunch.com" target="_blank" rel="noopener"><img src="/badges/semilaunch.png" alt="Featured on SemiLaunch" width="88" height="31" /></a></footer>
+      <footer>
+        <div className="brand"><span className="brand-mark">✦</span><span>ASTRAL <b>WISH LAB</b></span></div>
+        <div className="footer-copy">
+          <p>Unofficial fan-made simulator with an original example roster. No official logos, character art, account credentials, or current game banner data are used.</p>
+          <nav aria-label="Footer navigation"><a href="/guides/pity-system/">Pity system &amp; soft pity math</a> · <a href="/guides/primogem-planning/">Primogem planning guide</a> · <a href="/next-banner/">Next banner</a> · <a href="/countdown/">Banner countdown</a></nav>
+          <p><a href="#top">Back to orbit ↑</a> · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a></p>
+        </div>
+        <div className="launch-badges">
+          <a className="semilaunch-badge" href="https://semilaunch.com" target="_blank" rel="noopener"><img src="/badges/semilaunch.png" alt="Featured on SemiLaunch" width="88" height="31" /></a>
+          <a className="firsto-badge" href="https://firsto.co" target="_blank" rel="noopener" title="Astral Wish Lab — Launched on Firsto"><img src="/badges/find-us-on-firsto.svg" alt="Astral Wish Lab — Launched on Firsto" width="111" height="42" /></a>
+        </div>
+      </footer>
     </div>
   )
 }
