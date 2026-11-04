@@ -57,7 +57,13 @@ function generateHub() {
       "name": "Astral Wish Lab",
       "url": "${SITE}",
       "logo": "${SITE}/favicon.svg",
-      "description": "Unofficial fan-made Genshin Impact and Wuthering Waves wish simulator, pity calculator, and gaming resources."
+      "description": "Unofficial fan-made Genshin Impact and Wuthering Waves wish simulator, pity calculator, and gaming resources.",
+      "sameAs": [
+        "https://twitter.com/astralwishlab",
+        "https://github.com/allenshi16/genshin-wish-simulator",
+        "https://github.com/allenshi16",
+        "https://www.linkedin.com/company/astral-wish-lab"
+      ]
     }
     </script>
     <script type="application/ld+json">
