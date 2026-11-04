@@ -53,6 +53,16 @@ function generateHub() {
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Astral Wish Lab",
+      "url": "${SITE}",
+      "logo": "${SITE}/favicon.svg",
+      "description": "Unofficial fan-made Genshin Impact and Wuthering Waves wish simulator, pity calculator, and gaming resources."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "SiteNavigationElement",
       "name": "Wuthering Waves Hub",
       "description": "Central hub for all Wuthering Waves content including character builds, active codes, banner schedules, and wish simulator.",

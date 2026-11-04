@@ -59,6 +59,41 @@
         ]
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Astral Wish Lab",
+        "url": "%VITE_SITE_URL%",
+        "logo": "%VITE_SITE_URL%favicon.svg",
+        "description": "Unofficial fan-made Genshin Impact and Wuthering Waves wish simulator, pity calculator, and gaming resources.",
+        "sameAs": [
+          "https://twitter.com/astralwishlab",
+          "https://github.com/allenshi16/genshin-wish-simulator"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Astral Wish Lab",
+        "url": "%VITE_SITE_URL%",
+        "description": "Free Genshin Impact and Wuthering Waves wish simulator with pity calculator, banner countdown, and character guides.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "%VITE_SITE_URL%?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Astral Wish Lab"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root">
