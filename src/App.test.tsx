@@ -64,4 +64,13 @@ describe('simulator pull lifecycle', () => {
     expect(firsto).toHaveAttribute('title', 'Astral Wish Lab — Launched on Firsto')
     expect(firsto.querySelector('img')).toHaveAttribute('src', '/badges/find-us-on-firsto.svg')
   })
+
+  it('states the unofficial fan-project disclaimer on the homepage', () => {
+    render(<App />)
+    const disclaimer = /Astral Wish Lab is an unofficial fan project and is not affiliated with, endorsed, or sponsored by HoYoverse or any game publisher/
+    expect(screen.getAllByText(disclaimer).length).toBeGreaterThanOrEqual(1)
+    const footer = document.querySelector('footer')
+    expect(footer).toHaveTextContent(disclaimer)
+    expect(footer).toHaveTextContent(/trademarks of their respective owners/)
+  })
 })
