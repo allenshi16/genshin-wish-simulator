@@ -159,6 +159,7 @@ function App() {
         <div className="launch-badges">
           <a className="semilaunch-badge" href="https://semilaunch.com" target="_blank" rel="noopener"><img src="/badges/semilaunch.png" alt="Featured on SemiLaunch" width="88" height="31" /></a>
           <a className="firsto-badge" href="https://firsto.co" target="_blank" rel="noopener" title="Astral Wish Lab — Launched on Firsto"><img src="/badges/find-us-on-firsto.svg" alt="Astral Wish Lab — Launched on Firsto" width="111" height="42" /></a>
+          <a className="lifto-badge" href="https://liftoapp.com/product/astral-wish-lab" target="_blank" rel="noopener noreferrer"><img src="/badges/featured-on-lifto.svg" alt="Featured on Lifto" width="200" height="54" /></a>
         </div>
       </footer>
     </div>

@@ -54,7 +54,7 @@ describe('simulator pull lifecycle', () => {
     vi.restoreAllMocks()
   })
 
-  it('renders SemiLaunch and Firsto badges in the homepage footer', () => {
+  it('renders SemiLaunch, Firsto, and Lifto badges in the homepage footer', () => {
     render(<App />)
     const semi = screen.getByRole('link', { name: 'Featured on SemiLaunch' })
     expect(semi).toHaveAttribute('href', 'https://semilaunch.com')
@@ -63,6 +63,10 @@ describe('simulator pull lifecycle', () => {
     expect(firsto).toHaveAttribute('href', 'https://firsto.co')
     expect(firsto).toHaveAttribute('title', 'Astral Wish Lab — Launched on Firsto')
     expect(firsto.querySelector('img')).toHaveAttribute('src', '/badges/find-us-on-firsto.svg')
+    const lifto = screen.getByRole('link', { name: 'Featured on Lifto' })
+    expect(lifto).toHaveAttribute('href', 'https://liftoapp.com/product/astral-wish-lab')
+    expect(lifto).toHaveAttribute('rel', 'noopener noreferrer')
+    expect(lifto.querySelector('img')).toHaveAttribute('src', '/badges/featured-on-lifto.svg')
   })
 
   it('states the unofficial fan-project disclaimer on the homepage', () => {
