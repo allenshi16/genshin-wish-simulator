@@ -5,7 +5,8 @@ const siteUrl = new URL(process.env.VITE_SITE_URL).href
 const allowLocalhost = process.argv.includes('--allow-localhost')
 const files = ['dist/robots.txt', 'dist/sitemap.xml', 'dist/privacy/index.html']
 
-for (const file of files) {
+// Replace %VITE_SITE_URL% in all HTML files
+for (const file of [...files, 'dist/index.html']) {
   const source = await readFile(file, 'utf8')
   const output = source.replaceAll('%VITE_SITE_URL%', siteUrl)
   if (output.includes('%VITE_SITE_URL%')) {
