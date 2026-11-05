@@ -34,6 +34,8 @@ const checks = [
   [visibleText.includes('weapon banner'), 'Visible copy must state the weapon banner scope.'],
   [html.includes('application/ld+json'), 'Software application structured data is missing.'],
   [html.includes('rel="canonical"'), 'Canonical URL is missing.'],
+  [html.includes('unofficial fan project') && html.includes('not affiliated with, endorsed, or sponsored by HoYoverse'), 'Homepage static copy must include the fan-project disclaimer.'],
+  [visibleText.includes('unofficial fan project') && visibleText.includes('not affiliated with, endorsed, or sponsored by hoyoverse'), 'Visible React copy must include the fan-project disclaimer.'],
 ]
 
 const failures = checks.filter(([passed]) => !passed).map(([, message]) => message)
