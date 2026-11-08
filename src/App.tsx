@@ -159,6 +159,12 @@ function App() {
         <div className="launch-badges">
           <a className="semilaunch-badge" href="https://semilaunch.com" target="_blank" rel="noopener"><img src="/badges/semilaunch.png" alt="Featured on SemiLaunch" width="88" height="31" /></a>
           <a className="firsto-badge" href="https://firsto.co" target="_blank" rel="noopener" title="Astral Wish Lab — Launched on Firsto"><img src="/badges/find-us-on-firsto.svg" alt="Astral Wish Lab — Launched on Firsto" width="111" height="42" /></a>
+          <span className="launch-llama-badge">
+            <a href="https://tools.launchllama.co/products/astral-wish-lab?utm_source=badge&utm_medium=referral" target="_blank" rel="noopener noreferrer">
+              <img src="/badges/launch-llama-featured.png" alt="Launch Llama Tools" width="200" height="52" />
+            </a>
+            <a className="launch-llama-mcp" href="https://mcpshelf.co/?utm_source=badge&utm_medium=referral" target="_blank" rel="noopener noreferrer">Launch your MCP</a>
+          </span>
         </div>
       </footer>
     </div>
