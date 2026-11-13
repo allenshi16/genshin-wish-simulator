@@ -88,7 +88,7 @@ function App() {
       <p className="sr-only" aria-live="polite">{announcement}</p>
       <header className="topbar">
         <a className="brand" href="#top" aria-label="Astral Wish Lab home"><span className="brand-mark">✦</span><span>ASTRAL <b>WISH LAB</b></span></a>
-        <nav aria-label="Primary navigation"><a href="#simulator">Wish</a><a href="#collection">Collection</a><a href="#planner">Planner</a><a href="#method">Rules</a></nav>
+        <nav aria-label="Primary navigation"><a href="#simulator">Wish</a><a href="#collection">Collection</a><a href="#planner">Planner</a><a href="#method">Rules</a><a href="/characters/">Characters</a><a href="/guides/pity-system/">Pity Calc</a><a href="/next-banner/">Next Banner</a></nav>
         <span className="status-dot">Local data only</span>
       </header>
 
@@ -153,7 +153,7 @@ function App() {
         <div className="footer-copy">
           <p>Astral Wish Lab is an unofficial fan project and is not affiliated with, endorsed, or sponsored by HoYoverse or any game publisher. All game names, characters, and related materials are trademarks of their respective owners. Our simulator is for entertainment and educational purposes only.</p>
           <p>Unofficial fan-made simulator with an original example roster. No official logos, character art, account credentials, or current game banner data are used.</p>
-          <nav aria-label="Footer navigation"><a href="/guides/pity-system/">Pity system &amp; soft pity math</a> · <a href="/guides/primogem-planning/">Primogem planning guide</a> · <a href="/next-banner/">Next banner</a> · <a href="/countdown/">Banner countdown</a></nav>
+          <nav aria-label="Footer navigation"><a href="/">Wish Simulator</a> · <a href="/characters/">All Characters</a> · <a href="/guides/pity-system/">Pity calculator &amp; soft pity math</a> · <a href="/guides/primogem-planning/">Primogem planning guide</a> · <a href="/next-banner/">Next banner</a> · <a href="/countdown/">Banner countdown</a></nav>
           <p><a href="#top">Back to orbit ↑</a> · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a></p>
         </div>
         <div className="launch-badges">

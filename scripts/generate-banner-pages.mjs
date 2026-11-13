@@ -36,8 +36,15 @@ function esc(s) {
 }
 
 function formatDate(iso) {
-  return new Date(iso).toISOString().replace('T', ' ').replace(':00Z', ' UTC')
+  return new Date(iso).toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, ' UTC')
 }
+
+// Most recent confirmed (non-TBA) banner from history — used for factual
+// "next banner after X" phrasing when the current phase is unannounced.
+const lastConfirmed = bannerHistory.versions
+  .flatMap(v => v.phases.map(p => ({ ...p, version: v.version })))
+  .filter(p => p.character && p.character !== 'TBA' && new Date(p.end) < new Date())
+  .sort((a, b) => new Date(b.end) - new Date(a.end))[0]
 
 // ──────────────────────────────────────────────
 // /next-banner/
@@ -60,9 +67,12 @@ function generateNextBanner() {
   if (isBannerEnded) pageState = 'ended'
   else if (isBannerNotStarted) pageState = 'not-started'
 
-  // Title format: "Genshin Next Banner: <character> + Countdown & Prediction"
-  const charDisplay = isCurTBA ? '' : `: ${curChar.name}`
-  const titleFull = `Genshin Next Banner${charDisplay} + Countdown & Prediction`
+  // Title: named character when known; otherwise "after <last confirmed>" + version
+  const titleFull = isCurTBA
+    ? (lastConfirmed
+      ? `Genshin Next Banner After ${lastConfirmed.character}: Countdown & Prediction`
+      : `Genshin Next Banner ${current.version}: Countdown & Prediction`)
+    : `Genshin Next Banner: ${curChar.name} + Countdown & Prediction`
 
   // Helper for conditional text
   const charOrTBA = (val) => (val === 'TBA' || val === undefined ? 'To be announced' : val)
@@ -86,12 +96,14 @@ function generateNextBanner() {
 
   // H1 display
   const h1Html = isCurTBA
-    ? '<h1>Genshin Next Banner</h1>'
+    ? (lastConfirmed
+      ? `<h1>Genshin Next Banner After ${esc(lastConfirmed.character)} — Version ${esc(current.version)} ${esc(current.label)}</h1>`
+      : `<h1>Genshin Next Banner — Version ${esc(current.version)}</h1>`)
     : `<h1>Genshin Next Banner: <span class="star">${'★'.repeat(curChar.rarity || 5)}</span> ${esc(curChar.name)}</h1>`
 
   // Intro paragraph
   const introHtml = isCurTBA
-    ? '<p>The current Genshin Impact banner information is being updated. Check back soon for character details, countdown timer, and next phase prediction.</p>'
+    ? `<p>Genshin Impact Version ${esc(current.version)} ${esc(current.label)} runs until <strong>${formatDate(current.endUtc)}</strong>. The featured character for this phase is not yet confirmed in our schedule${lastConfirmed ? ` — the most recent confirmed banner was <strong>${esc(lastConfirmed.character)}</strong> (${esc(lastConfirmed.element)}, ended ${esc(lastConfirmed.end)})` : ''}. Live countdown, next-phase start date and full banner history below.</p>`
     : `<p>The current Genshin Impact banner features <strong>${esc(curChar.name)}</strong> — a ${curChar.rarity}-star <strong>${esc(curChar.element)}</strong> ${esc(curChar.weapon)} user (${esc(curChar.role)}). Banner ends <strong>${formatDate(current.endUtc)}</strong>. Countdown and next-phase prediction below.</p>`
 
   // Countdown card
@@ -103,8 +115,9 @@ function generateNextBanner() {
   const currentCardHtml = isCurTBA
     ? `<div class="banner-card current">
     <span class="tag tag-now">NOW</span>
-    <h2>Banner Details Pending</h2>
-    <p>Character information to be announced. Check back soon or visit the <a href="/">wish simulator</a> while you wait.</p>
+    <h2>Version ${esc(current.version)} ${esc(current.label)} — Details Pending</h2>
+    ${fourStarsHtml}
+    <p>Ends ${formatDate(current.endUtc)}. Featured 5★ to be confirmed. <a href="/characters/">Browse all character simulators</a> or try the <a href="/">wish simulator</a> while you wait.</p>
     <a class="sim-cta" href="/">Try the wish simulator →</a>
   </div>`
     : `<div class="banner-card current">
@@ -120,7 +133,7 @@ function generateNextBanner() {
   const nextCardHtml = isNxtTBA
     ? `<div class="banner-card next-phase">
     <span class="tag tag-next">NEXT</span>
-    <h2>To be announced</h2>
+    <h2>Version ${esc(next.version)} ${esc(next.label)} — To be announced</h2>
     <p>Next phase character to be announced. Expected start: ${formatDate(next.startUtc)}</p>
     <a class="sim-cta" href="/countdown/">See full countdown →</a>
   </div>`
@@ -140,7 +153,7 @@ function generateNextBanner() {
   // "When does X banner end?" section
   const whenEndsTitleHtml = isCurTBA ? 'When does the current banner end?' : `When does the ${esc(curChar.name)} banner end?`
   const whenEndsBodyHtml = isCurTBA
-    ? '<p>Banner dates are being updated. Check the <a href="/countdown/">countdown page</a> for live timer information.</p>'
+    ? `<p>The current Version ${esc(current.version)} ${esc(current.label)} banner ends <strong>${formatDate(current.endUtc)}</strong>. After it ends, Version ${esc(next.version)} ${esc(next.label)} begins on ${formatDate(next.startUtc)}. Track the exact moment on the <a href="/countdown/">countdown page</a>.</p>`
     : `<p>The current character event banner featuring ${esc(curChar.name)} runs from ${formatDate(current.startUtc)} to <strong>${formatDate(current.endUtc)}</strong>. That gives you roughly ${Math.round((endUtc - new Date(current.startUtc)) / 86400000)} days. After this phase ends, the next phase (${next.label}) begins immediately with ${charOrTBA(nxtChar.character)}.</p>`
 
   // "Should you pull for X or save for Y?" section
@@ -154,8 +167,12 @@ function generateNextBanner() {
 
   // FAQ answer for "When is the next Genshin banner?"
   const faqNextAnswer = isNxtTBA
-    ? `The next phase begins ${formatDate(next.startUtc)}. Character details to be announced.`
+    ? `The next phase (Version ${next.version} ${next.label}) begins ${formatDate(next.startUtc)}. Character details to be announced.`
     : `The next phase begins ${formatDate(next.startUtc)} with ${nxtChar.character}. Check the next banner page for live countdown and updates.`
+
+  const metaDesc = isCurTBA
+    ? `When does the current Genshin Impact banner end? Version ${current.version} ${current.label} runs until ${formatDate(current.endUtc)}${lastConfirmed ? `, after ${lastConfirmed.character}'s banner` : ''}. Live countdown, next banner prediction and wish simulator.`
+    : `When does the current Genshin Impact banner end? ${curChar.name} is up now until ${formatDate(current.endUtc)}. See the countdown, next banner prediction, and jump into the wish simulator.`
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -163,7 +180,7 @@ function generateNextBanner() {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${titleFull}</title>
-<meta name="description" content="When does the current Genshin Impact banner end? ${esc(curChar.name)} is up now until ${formatDate(current.endUtc)}. See the countdown, next banner prediction, and jump into the wish simulator.">
+<meta name="description" content="${metaDesc}">
 <link rel="canonical" href="${CANONICAL_BASE}/next-banner/">
 <meta name="robots" content="index,follow">
 <meta name="adsense-client" content="${ADSENSE_CLIENT}">
@@ -181,7 +198,7 @@ function generateNextBanner() {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "${titleFull}",
-  "description": "${isCurTBA ? 'Genshin Impact next banner information, countdown, and predictions.' : 'Current Genshin banner featuring ' + esc(curChar.name) + ' ends ' + formatDate(current.endUtc) + '. Includes countdown, next phase speculation, and wish simulator.'}",
+  "description": "${isCurTBA ? `Genshin Impact Version ${current.version} next banner${lastConfirmed ? ' after ' + lastConfirmed.character : ''}: end date, live countdown and next-phase predictions.` : 'Current Genshin banner featuring ' + esc(curChar.name) + ' ends ' + formatDate(current.endUtc) + '. Includes countdown, next phase speculation, and wish simulator.'}",
   "url": "${CANONICAL_BASE}/next-banner/",
   "author": { "@type": "Organization", "name": "Astral Wish Lab" },
   "datePublished": "${schedule.updated}",
@@ -292,7 +309,10 @@ ${bannerHistory.versions.map(v => v.phases.map(p => `<tr><td style="padding:6px 
 </div>
 
 <div class="ad-slot" aria-hidden="true"></div>
-<footer>Astral Wish Lab is an unofficial fan tool and is not affiliated with or endorsed by HoYoverse. Banner data is updated manually and may not reflect the latest official announcements. <a href="/privacy/">Privacy</a></footer>
+<footer>
+<p><a href="/">Wish Simulator</a> · <a href="/guides/pity-system/">Pity Calculator</a> · <a href="/next-banner/">Next Banner</a> · <a href="/characters/">All Characters</a></p>
+<p>Astral Wish Lab is an unofficial fan tool and is not affiliated with or endorsed by HoYoverse. Banner data is updated manually and may not reflect the latest official announcements. <a href="/privacy/">Privacy</a></p>
+</footer>
 </div>
 <script src="/next-banner/countdown.js" defer></script>
 <script src="/ads.js" defer></script>
@@ -366,22 +386,25 @@ function generateCountdown() {
   mkdirSync(OUT_DIR, { recursive: true })
 
   const curChar = current.character
+  const isCurTBA = curChar.name === 'TBA' || curChar.name === undefined
+  const bannerLabel = isCurTBA ? `Version ${current.version} ${current.label}` : curChar.name
+  const titleName = isCurTBA ? `Version ${current.version}` : curChar.name
 
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Genshin Banner Countdown — ${esc(curChar.name)} Timer + All Server Times</title>
-<meta name="description" content="Live Genshin Impact banner countdown timer. See exactly when the ${esc(curChar.name)} banner ends across NA, EU, Asia, and all servers. Multi-timezone display.">
+<title>Genshin Banner Countdown — ${esc(titleName)} Timer + All Server Times</title>
+<meta name="description" content="Live Genshin Impact banner countdown timer. See exactly when the ${esc(bannerLabel)} banner ends across NA, EU, Asia, and all servers. Multi-timezone display.">
 <link rel="canonical" href="${CANONICAL_BASE}/countdown/">
 <meta name="robots" content="index,follow">
 <meta name="adsense-client" content="${ADSENSE_CLIENT}">
 <meta name="ga-measurement" content="${GA_ID}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Genshin Banner Countdown — ${esc(curChar.name)} Live Timer">
-<meta property="og:description" content="Live countdown to the end of the ${esc(curChar.name)} banner. All server times included.">
+<meta property="og:title" content="Genshin Banner Countdown — ${esc(titleName)} Live Timer">
+<meta property="og:description" content="Live countdown to the end of the ${esc(bannerLabel)} banner. All server times included.">
 <meta property="og:url" content="${CANONICAL_BASE}/countdown/">
 <meta property="og:image" content="${CANONICAL_BASE}/og-card.svg">
 <meta name="twitter:card" content="summary_large_image">
@@ -390,7 +413,7 @@ function generateCountdown() {
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Genshin Banner Countdown: ${esc(curChar.name)} Live Timer with All Server Times",
+  "headline": "Genshin Banner Countdown: ${esc(titleName)} Live Timer with All Server Times",
   "description": "Live countdown timer for the current Genshin Impact banner. Multi-timezone display covering NA, EU, Asia servers.",
   "url": "${CANONICAL_BASE}/countdown/",
   "author": { "@type": "Organization", "name": "Astral Wish Lab" },
@@ -427,11 +450,11 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
 <div class="wrap">
 <p><a href="/">← Back to Astral Wish Lab — Genshin Wish Simulator</a></p>
 
-<h1>Genshin Banner Countdown <span class="star">${'★'.repeat(curChar.rarity)}</span></h1>
-<p>Live timer for the <strong>${esc(curChar.name)}</strong> character event banner. All times update every second.</p>
+<h1>Genshin Banner Countdown — ${esc(titleName)} <span class="star">${'★'.repeat(curChar.rarity || 5)}</span></h1>
+<p>Live timer for the <strong>${esc(bannerLabel)}</strong> character event banner. All times update every second.</p>
 
 <div class="card">
-<div class="countdown-label">${esc(curChar.name)} banner ends in</div>
+<div class="countdown-label">${isCurTBA ? 'Current banner' : esc(curChar.name) + ' banner'} ends in</div>
 <div class="countdown-main" id="countdown" data-end="${current.endUtc}" data-start="${current.startUtc}">—</div>
 <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
 <div class="countdown-sub" id="countdownSub"></div>
@@ -444,13 +467,16 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
 
 <div class="card">
 <h2>What happens when this banner ends?</h2>
-<p>When the ${esc(curChar.name)} banner ends, the next phase begins immediately. Your pity and 50/50 guarantee carry over — they never reset between banners. Use the <a href="/">wish simulator</a> to plan your pulls for the next phase.</p>
+<p>When the ${esc(bannerLabel)} banner ends, the next phase begins immediately. Your pity and 50/50 guarantee carry over — they never reset between banners. Use the <a href="/">wish simulator</a> to plan your pulls for the next phase, or check the <a href="/next-banner/">next banner page</a> for what comes after.</p>
 <p>For the full probability breakdown, see the <a href="/guides/pity-system/">soft pity calculator</a>. To budget your primogems across upcoming banners, check the <a href="/guides/primogem-planning/">primogem planning guide</a>.</p>
 <a class="sim-cta" href="/">Open the wish simulator →</a>
 </div>
 
 <div class="ad-slot" aria-hidden="true"></div>
-<footer>Astral Wish Lab is an unofficial fan tool and is not affiliated with or endorsed by HoYoverse. <a href="/privacy/">Privacy</a></footer>
+<footer>
+<p><a href="/">Wish Simulator</a> · <a href="/guides/pity-system/">Pity Calculator</a> · <a href="/next-banner/">Next Banner</a> · <a href="/characters/">All Characters</a></p>
+<p>Astral Wish Lab is an unofficial fan tool and is not affiliated with or endorsed by HoYoverse. <a href="/privacy/">Privacy</a></p>
+</footer>
 </div>
 <script src="/countdown/countdown.js" defer></script>
 <script src="/ads.js" defer></script>
