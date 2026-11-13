@@ -54,7 +54,7 @@ describe('simulator pull lifecycle', () => {
     vi.restoreAllMocks()
   })
 
-  it('renders SemiLaunch and Firsto badges in the homepage footer', () => {
+  it('renders SemiLaunch, Firsto, and Launch Llama badges in the homepage footer', () => {
     render(<App />)
     const semi = screen.getByRole('link', { name: 'Featured on SemiLaunch' })
     expect(semi).toHaveAttribute('href', 'https://semilaunch.com')
@@ -63,6 +63,13 @@ describe('simulator pull lifecycle', () => {
     expect(firsto).toHaveAttribute('href', 'https://firsto.co')
     expect(firsto).toHaveAttribute('title', 'Astral Wish Lab — Launched on Firsto')
     expect(firsto.querySelector('img')).toHaveAttribute('src', '/badges/find-us-on-firsto.svg')
+    const launchLlama = screen.getByRole('link', { name: 'Launch Llama Tools' })
+    expect(launchLlama).toHaveAttribute('href', 'https://tools.launchllama.co/products/astral-wish-lab?utm_source=badge&utm_medium=referral')
+    expect(launchLlama).toHaveAttribute('rel', 'noopener noreferrer')
+    expect(launchLlama.querySelector('img')).toHaveAttribute('src', '/badges/launch-llama-featured.png')
+    const mcp = screen.getByRole('link', { name: 'Launch your MCP' })
+    expect(mcp).toHaveAttribute('href', 'https://mcpshelf.co/?utm_source=badge&utm_medium=referral')
+    expect(mcp).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   it('states the unofficial fan-project disclaimer on the homepage', () => {
