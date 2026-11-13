@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#07101e" />
-    <meta name="description" content="Free Genshin Impact Wish Simulator: test pulls, calculate soft pity & 50/50 odds, plan primogems. Local wish stats — no login." />
-    <meta property="og:title" content="Genshin Impact Wish Simulator & Pity — Astral Wish Lab" />
+    <meta name="description" content="Free Genshin wish sim & pity calculator: test pulls, soft pity & 50/50 odds, plan primogems per patch. Local wish stats — no login." />
+    <meta property="og:title" content="Genshin Wish Simulator & Pity Calculator — Astral Wish Lab" />
     <meta property="og:description" content="Simulate character-event pulls, estimate pity and 50/50 odds, plan primogems, and keep wish statistics locally." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="%VITE_SITE_URL%" />
@@ -13,14 +13,14 @@
     <meta property="og:image:alt" content="Astral Wish Lab celestial wish simulator and pity planner" />
     <meta property="og:site_name" content="Astral Wish Lab" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Genshin Impact Wish Simulator & Pity — Astral Wish Lab" />
+    <meta name="twitter:title" content="Genshin Wish Simulator & Pity Calculator — Astral Wish Lab" />
     <meta name="twitter:description" content="Simulate character-event pulls, estimate pity and 50/50 odds, plan primogems, and keep wish statistics locally." />
     <meta name="twitter:image" content="%VITE_SITE_URL%og-card.svg" />
     <link rel="canonical" href="%VITE_SITE_URL%" />
     <meta name="adsense-client" content="%VITE_ADSENSE_CLIENT%" />
     <meta name="ga-measurement" content="G-HGMKQ47FZK" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>Genshin Impact Wish Simulator & Pity — Astral Wish Lab</title>
+    <title>Genshin Wish Simulator & Pity Calculator — Astral Wish Lab</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -61,6 +61,8 @@
             "acceptedAnswer": { "@type": "Answer", "text": "A free-to-play player earns roughly 7,700 primogems per 42-day patch (about 48 wishes) from dailies, events, Spiral Abyss, Imaginarium Theater and mail. With Welkin Moon that rises to ~67 wishes, and with Welkin + Battle Pass to ~75. Use the primogem planner on this page to calculate your exact budget." } },
           { "@type": "Question", "name": "Does pity reset between banners?",
             "acceptedAnswer": { "@type": "Answer", "text": "No. Pity count and the 50/50 guarantee both carry over between character event banners. If you are at 70 pity now, you stay at 70 pity when the next character banner starts. The worst case for one featured character is 180 pulls (90 hard pity plus 90 guaranteed)." } },
+          { "@type": "Question", "name": "Does the wish sim save my pity between visits?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. The sim stores your pity counters, guarantee status and wish history in your browser's local storage, so you can close the tab and pick up exactly where you left off. No account or login is needed, and the reset button clears everything." } },
           { "@type": "Question", "name": "What is the difference between hard pity and soft pity?",
             "acceptedAnswer": { "@type": "Answer", "text": "Hard pity is the pull number at which a 5-star is guaranteed — pull 90 on character banners, pull 80 on weapon banners. Soft pity is the range before hard pity where the rate increases sharply — from pull 74 on character banners. Most players get their 5-star during the soft pity window, well before reaching hard pity." } }
         ]
@@ -251,6 +253,7 @@
         <p><strong>How many primogems do I need per patch?</strong> A free-to-play player earns roughly 7,700 primogems per 42-day patch (about 48 wishes) from dailies, events, Spiral Abyss, Imaginarium Theater and mail. With Welkin Moon that rises to ~67 wishes, and with Welkin + Battle Pass to ~75. Use the primogem planner on this page to calculate your exact budget for the characters you want.</p>
         <p><strong>Does pity reset between banners?</strong> No. Pity count and the 50/50 guarantee both carry over between character event banners. If you are at 70 pity now, you stay at 70 pity when the next character banner starts. The worst case for one featured character is 180 pulls (90 hard pity plus 90 guaranteed). Note that weapon banner Fate Points do reset when the weapon banner ends.</p>
         <p><strong>What is the difference between hard pity and soft pity?</strong> Hard pity is the pull number at which a 5-star is guaranteed — pull 90 on character banners, pull 80 on weapon banners. Soft pity is the range before hard pity where the rate increases sharply — from pull 74 on character banners. Most players get their 5-star during the soft pity window, well before reaching hard pity.</p>
+        <p><strong>Does the wish sim save my pity between visits?</strong> Yes. The sim stores your pity counters, guarantee status and wish history in your browser's local storage, so you can close the tab and pick up exactly where you left off. No account or login is needed, and the reset button clears everything.</p>
         <footer>
           <div class="footer-content">
             <div class="footer-author">

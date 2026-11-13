@@ -396,7 +396,7 @@ function generateCountdown() {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Genshin Banner Countdown — ${esc(titleName)} Timer + All Server Times</title>
-<meta name="description" content="Live Genshin Impact banner countdown timer. See exactly when the ${esc(bannerLabel)} banner ends across NA, EU, Asia, and all servers. Multi-timezone display.">
+<meta name="description" content="Live Genshin banner countdown: when the ${esc(bannerLabel)} banner ends on NA, EU and Asia servers${isCurTBA && lastConfirmed ? ` — the phase after ${esc(lastConfirmed.character)}` : ''}. Multi-timezone timer.">
 <link rel="canonical" href="${CANONICAL_BASE}/countdown/">
 <meta name="robots" content="index,follow">
 <meta name="adsense-client" content="${ADSENSE_CLIENT}">
@@ -452,6 +452,7 @@ footer{margin-top:34px;color:var(--dim);font-size:.85rem}
 
 <h1>Genshin Banner Countdown — ${esc(titleName)} <span class="star">${'★'.repeat(curChar.rarity || 5)}</span></h1>
 <p>Live timer for the <strong>${esc(bannerLabel)}</strong> character event banner. All times update every second.</p>
+${isCurTBA && lastConfirmed ? `<p>This phase follows <strong>${esc(lastConfirmed.character)}</strong>'s banner (ended ${esc(lastConfirmed.end)}). Pity and the 50/50 guarantee carry over, so pulls spent on the ${esc(lastConfirmed.character)} banner still count here.</p>` : ''}
 
 <div class="card">
 <div class="countdown-label">${isCurTBA ? 'Current banner' : esc(curChar.name) + ' banner'} ends in</div>
