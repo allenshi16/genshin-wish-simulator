@@ -6,3 +6,4 @@
 - [Home](https://genshinwishsimulator.app/): Wish simulator and tools
 - [Pity System Math](https://genshinwishsimulator.app/guides/pity-system/): Exact soft pity, hard pity and 50/50 probabilities
 - [Primogem Planning](https://genshinwishsimulator.app/guides/primogem-planning/): Primogem income per patch for F2P, Welkin and BP players
+- [Simurgh Lore](https://genshinwishsimulator.app/guides/simurgh/): Genshin's divine bird — Khvarena origin, cataclysm sacrifice, Khvarena of Good and Evil quest order, Amrita Pool rewards and OST

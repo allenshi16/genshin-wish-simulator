@@ -385,6 +385,7 @@ function main() {
     { loc: 'characters/noy/', lastmod: '2026-11-03' },
     { loc: 'guides/pity-system/', lastmod: '2026-08-16' },
     { loc: 'guides/primogem-planning/', lastmod: '2026-11-13' },
+    { loc: 'guides/simurgh/', lastmod: '2026-11-17' },
     { loc: 'genshin-wish-tracker/', lastmod: '2026-10-19' },
     { loc: 'next-banner/', lastmod: '2026-11-13' },
     { loc: 'countdown/', lastmod: '2026-11-13' },
